@@ -10,7 +10,7 @@ execute:
 
 ## D3 Interactive OJS Treemap
 
-This treemap uses **Observable JS** to render a D3 hierarchy. It features centered labels, a hover effect, and a custom HTML floating tooltip.
+This a treemap uses **Observable JS** to render a D3 hierarchy. It features centered labels, a hover effect, and a custom HTML floating tooltip.
 
 ```{ojs}
 // --- 1. DATA & CONFIGURATION ---
