@@ -1,0 +1,28 @@
+---
+title: BcvReader
+filters:
+  - quarto-svelte
+quarto-svelte:
+  use:
+    - BcvReader.svelte
+format: html
+---
+
+<style>
+/* Adjust the height of the title block banner */
+quarto-title-banner {
+height: 100px; /* Increase or decrease as needed */
+}
+
+/* Adjust the font size of the title */
+#title-block-header h3 {
+font-size: 1.5rem; /* Adjust font size */
+}
+</style>
+
+> strict OSIS output for biblegateway. NB: rather use HSUB_RefArray element for fetch via hsubre
+
+```{ojs}
+//| echo: false
+myActionBar = html`<my-bcvreader></my-bcvreader>`
+```

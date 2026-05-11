@@ -1,0 +1,28 @@
+---
+title: OsisParserUI
+filters:
+  - jimjam-slam/quarto-svelte
+quarto-svelte:
+  use:
+    - ../components/OsisParserUI.svelte
+format: html
+---
+
+<style>
+/* Adjust the height of the title block banner */
+quarto-title-banner {
+height: 80px; /* Increase or decrease as needed */
+}
+
+/* Adjust the font size of the title */
+#title-block-header h3 {
+font-size: 1.5rem; /* Adjust font size */
+}
+</style>
+
+> strict idempotent OSIS conversion - _Intra component communication via windows.store_. TODO:  H-store vs O-store
+
+```{ojs}
+//| echo: false
+myOsisParser = html`<my-osisparserui></my-osisparserui>`
+```

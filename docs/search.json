@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Svlt2",
     "section": "",
-    "text": "Post With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nMay 9, 2026\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nMay 6, 2026\n\n\nTristan O’Malley\n\n\n\n\n\n\n\n\n\n\n\n\nOJS Treemap-Interactive in Quarto\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nMay 6, 2026\n\n\ngp\n\n\n\n\n\n\nNo matching items"
+    "text": "BcvReader\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOsisParserUI\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nMay 9, 2026\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nMay 6, 2026\n\n\nTristan O’Malley\n\n\n\n\n\n\n\n\n\n\n\n\nOJS Treemap-Interactive in Quarto\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nMay 6, 2026\n\n\ngp\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/3map/index.html",
@@ -28,11 +28,32 @@
     "text": "This is a post with executable code."
   },
   {
+    "objectID": "posts/BcvReader.html",
+    "href": "posts/BcvReader.html",
+    "title": "BcvReader",
+    "section": "",
+    "text": "strict OSIS output for biblegateway. NB: rather use HSUB_RefArray element for fetch via hsubre\n\n\nmyActionBar = html`&lt;my-bcvreader&gt;&lt;/my-bcvreader&gt;`"
+  },
+  {
+    "objectID": "BcvReader.html",
+    "href": "BcvReader.html",
+    "title": "BcvReader",
+    "section": "",
+    "text": "strict OSIS output for biblegateway. NB: rather use HSUB_RefArray element for fetch via hsubre\n\n\nmyActionBar = html`&lt;my-bcvreader&gt;&lt;/my-bcvreader&gt;`"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
     "section": "",
     "text": "About this blog"
+  },
+  {
+    "objectID": "posts/OsisParserUI.html",
+    "href": "posts/OsisParserUI.html",
+    "title": "OsisParserUI",
+    "section": "",
+    "text": "strict idempotent OSIS conversion - Intra component communication via windows.store. TODO: H-store vs O-store\n\n\nmyOsisParser = html`&lt;my-osisparserui&gt;&lt;/my-osisparserui&gt;`"
   },
   {
     "objectID": "posts/welcome/index.html",

@@ -2,6 +2,8 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/BcvReader.html",
+      "/posts/OsisParserUI.html",
       "/posts/post-with-code/index.html",
       "/posts/welcome/index.html",
       "/posts/3map/index.html"
