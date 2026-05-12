@@ -7,7 +7,7 @@ project:
     - "posts/*.qmd"
 
 website:
-  title: "Svlt2"
+  title: "Resvlt"
   navbar:
     right:
       - about.qmd
@@ -17,7 +17,7 @@ website:
         href: https://twitter.com
 format:
   html:
-    theme: cosmo
+    theme: lumen
     css: styles.css
 
 
