@@ -1,0 +1,25 @@
+---
+title: Verse Workflow
+filters:
+  - jimjam-slam/quarto-svelte
+quarto-svelte:
+  use:
+    - ../components/OsisParserUI.svelte
+format: html
+---
+
+
+> For Bible Reference From UserInput To Display
+
+1. UserInput is Free Text Transformed to strict OSIS Then as_is_passthrough to service worker fetching. => parse.hsub_entities()
+- UserInput accepts free text as does bcv_parser
+- Parsing delivers Strict Idempotent String like (Gen.1.2 SG21); (Gal.2.8,Phil.4.6 KJV)
+- and HSUB_RefArray aka hsub_entities() like ["Gen.1.2!SG21","Gal.2.8,Phil.4.6!KJV"] with elements acceptable to hsubre service worker. 
+
+- URL service worker 
+- where to put fetch ?
+
+```{ojs}
+//| echo: false
+myOsisParser = html`<my-osisparserui></my-osisparserui>`
+```

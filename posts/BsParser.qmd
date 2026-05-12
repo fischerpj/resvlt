@@ -1,0 +1,95 @@
+---
+title: BsParser
+subtitle: "valid'em"
+execute:
+  echo: false
+---
+
+> Validate an bsInput with one super_bcv_wrapper
+
+OJS requires the path to start with ./ or ../
+
+::: {#inputDiv}
+<!-- inputDiv is considered Void-->
+:::
+
+```{ojs}
+import { bsInputgroupTransform } from "./bsui.js"
+import { super_bcv_parser } from "./bsBcv.js";
+
+superBCV = new super_bcv_parser() // instance of singleton parser
+
+viewof refInput = new bsInputgroupTransform({
+  prefixHTML: "<i class='bi bi-book'></i>",
+  placeholder: "Enter Bible reference…",
+  transform: superBCV.osis_array,     // <---- HERE
+  fetcher: superBCV.fetchPassage,
+  addLabel: "Add",
+  resetLabel: "RAZ",
+  clipLabel: "CLIP"
+}).node()
+
+refInput
+
+//superBCV.fetchPassage(refInput.current);
+
+//refInput.current   // "John.3.16"
+//refInput.accum     // ["John.3.16", ...]
+refInput.content   // sanitized passage_html from your Worker
+
+//html`${refInput.content}`
+```
+
+
+
+
+```{ojs}
+import { bsInputgroupFetch } from "./bsui.js"
+
+//superBCV2 = new super_bcv_parser() // instance of singleton parser
+
+viewof refInput2 = {
+  const bsgroup = new bsInputgroupFetch({
+    prefixHTML: "<i class='bi bi-book'></i>",
+    placeholder: "Enter Bible reference…",
+    transform: superBCV.osis_array,     // <---- HERE
+    fetcher: superBCV.fetchPassage,
+    addLabel: "Add",
+    resetLabel: "RAZ",
+    clipLabel: "CLIP"
+  }).node();
+
+  return bsgroup;
+}
+
+restyle = {
+  // Wait until OJS inserts it into the DOM
+  const container = viewof refInput2;
+//  const group = container.querySelector("div.input-group");
+  
+  const allButtons = container.querySelectorAll("button");
+
+  queueMicrotask(() => {
+   allButtons.forEach(btn => {
+      btn.classList.remove("btn-quarto");
+      console.log("Hey")
+    });
+  });
+  
+/**  
+  const obs = new MutationObserver(() => {
+    allButtons.forEach(btn => {
+        btn.classList.remove("btn-quarto");
+        });
+    });
+    
+  obs.observe(container, { childList: true, subtree: true });
+*/
+}
+
+refInput2.current   // "John.3.16"
+//refInput.accum     // ["John.3.16", ...]
+refInput2.content   // sanitized passage_html from your Worker
+
+```
+

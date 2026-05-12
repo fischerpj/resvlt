@@ -1,0 +1,95 @@
+---
+title: BsUi
+subtitle: "emulat'em"
+execute:
+  echo: false
+---
+
+> FIX OK .current, .accu OK restyle with queueMicrotask and MutationObserver OK transform
+
+::: {#inputDiv}
+<!-- inputDiv is considered Void-->
+:::
+
+// bsButton: Bootstrap-styled button, OJS-compatible, written as plain class javascript.
+
+
+```{ojs}
+import {bsButton} from "./bsui.js"
+
+viewof run = new bsButton({
+  label: "RAZ",
+  variant: "warning",
+  value: { action: "run" }
+}).node()
+
+run
+```
+
+<hr/>
+
+```{ojs}
+import { bsInput } from "./bsui.js"
+
+viewof name = new bsInput({
+  label: "Your name",
+  placeholder: "Type here…",
+  description: "bsInput: Bootstrap-styled text input, OJS-compatible as plain js class",
+  value: "Pier"
+}).node()
+
+name
+```
+
+<hr/>
+
+
+```{ojs}
+import { bsInputgroup } from "./bsui.js"
+
+viewof ig = new bsInputgroup({
+  placeholder: "Type something…",
+  buttonLabel: "Accumulate",
+  variant: "success"
+}).node()
+
+ig.current
+
+ig
+```
+
+```{ojs}
+import { bsInputgroup3 } from "./bsui.js"
+
+viewof ig3 = new bsInputgroup3({
+  placeholder: "Hi Type something3…",
+  prefixHTML: '<i class="bi bi-search"></i>',
+  addLabel: "Add",
+  resetLabel: "RAZ",
+  clipLabel: "Clip",
+  variant: "primary"
+}).node()
+
+ig3.current
+
+ig3
+```
+
+bsInputgroupTransform
+
+```{ojs}
+import { bsInputgroupTransform } from "./bsui.js"
+
+viewof ig_tfr = new bsInputgroupTransform({
+  placeholder: "Hi Type something tfrm…",
+  prefixHTML: '<i class="bi bi-search"></i>',
+  addLabel: "Add",
+  resetLabel: "RAZ",
+  clipLabel: "Clip",
+  variant: "primary"
+}).node()
+
+ig_tfr.current
+
+ig_tfr
+```
