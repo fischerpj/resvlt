@@ -1,0 +1,26 @@
+---
+title: BCV
+subtitle: "read'em"
+execute:
+  echo: false
+---
+
+> todo: create an inputGroup with Prefix  valid Input
+
+
+::: {#inputDiv}
+<!-- inputDiv is considered Void-->
+:::
+
+
+
+```{ojs}
+import { bsInput } from "./bsui.js"
+import { super_bcv_parser } from "./bsBcv.js";
+
+viewof refInput2 = {
+  const bsgroup = new bsInput().node();
+  return bsgroup;
+}
+```
+

@@ -283,3 +283,7 @@ export class super_bcv_parser_legacy {
   
 }
 
+/**
+const supbcv = new super_bcv_parser();
+console.log(supbcv.parse("Gen1.1").osis());
+*/

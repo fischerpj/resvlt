@@ -2,10 +2,12 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/Breader.html",
       "/posts/BsParser.html",
       "/posts/BsUi.html",
       "/posts/OsisParserUI.html",
       "/posts/VerseWorkflow.html",
+      "/posts/bcv.html",
       "/posts/example.html"
     ]
   }
