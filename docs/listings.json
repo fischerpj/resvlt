@@ -2,13 +2,19 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/BMix.html",
       "/posts/Breader.html",
+      "/posts/Breader2.html",
       "/posts/BsParser.html",
       "/posts/BsUi.html",
       "/posts/OsisParserUI.html",
       "/posts/VerseWorkflow.html",
       "/posts/bcv.html",
-      "/posts/example.html"
+      "/posts/echoInput.html",
+      "/posts/example.html",
+      "/posts/refui.html",
+      "/posts/strongWorkflow.html",
+      "/posts/widgets.html"
     ]
   }
 ]

@@ -1,0 +1,51 @@
+---
+title: refui
+subtitle: "Input_Bar.js with a) OJS contract b) Boostrap Style c) embedded bcv_parser"
+execute:
+  echo: false
+---
+
+::: {#inputDiv}
+<!-- inputDiv is considered Void-->
+:::
+
+```{ojs}
+  import { bsInput, RefEngine } from "./refui.js";
+  
+  engine = new RefEngine({
+    baseUrl: "https://hmi.pjafischer.workers.dev/bgw/cache/"
+  });
+  
+  viewof ref = new bsInput({
+    prefixHTML: "<i class='bi bi-book'></i>",
+    placeholder: "Enter reference",
+    addLabel: "Add",
+    resetLabel: "RAZ",
+    transform: (txt, prev) => engine.transform(txt, prev)
+  }).node();
+
+  // ref; // {osis, previousOsis, url_fetchable, response{..., duration,content}}
+  ref.response ? ref.response.content : "waiting for input";           // current OSIS
+//  ref.value.osis           // current OSIS
+//  ref.value.previousOsis   // previous OSIS
+//  ref.value.url_fetchable  // non-null only when OSIS changed
+//  ref.value.data           // fetched JSON (only when OSIS changed)
+
+// works OK at least on first one
+restyle = {
+  // Wait until OJS inserts it into the DOM
+  const container = viewof ref;
+//  const group = container.querySelector("div.input-group");
+  
+  const allButtons = container.querySelectorAll("button");
+
+  queueMicrotask(() => {
+   allButtons.forEach(btn => {
+      btn.classList.remove("btn-quarto");
+      console.log("Hey")
+    });
+  });
+} // end of restyle  
+
+```
+

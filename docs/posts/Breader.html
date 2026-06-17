@@ -102,6 +102,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
 <link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -175,58 +178,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <blockquote class="blockquote">
-<p><em>bsInput</em> –&gt; <em>validate/fetch</em> –&gt; <em>display</em>.</p>
+<p><em>bsInput</em> –&gt; <em>validate/fetch</em> –&gt; <em>display</em></p>
 </blockquote>
+<ul>
+<li>super_bcv_parser does <em>the validation</em> of an input string and</li>
+<li>bsInputAndDebounce manages <em>the UI</em>, reacts with a <em>transform/validation</em> method, triggers the <em>fetch</em></li>
+</ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+  bsInputAndDebounce --&gt; super_bcv_parser
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Attention! <em>uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received</em> Fix: is input is unchanged from previous dont trigger the fetch</p>
 <div id="inputDiv">
 <!-- inputDiv is considered Void-->
 </div>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="15" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 14;"><span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { bsInputAndFetch } <span class="im">from</span> <span class="st">"./bsui.js"</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { super_bcv_parser } <span class="im">from</span> <span class="st">"./bsBcv.js"</span><span class="op">;</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>superBCV <span class="op">=</span> <span class="kw">new</span> <span class="fu">super_bcv_parser</span>() <span class="co">// instance of singleton parser</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>viewof refInput2 <span class="op">=</span> {</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> bsgroup <span class="op">=</span> <span class="kw">new</span> <span class="fu">bsInputAndFetch</span>({</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">prefixHTML</span><span class="op">:</span> <span class="st">"&lt;i class='bi bi-book'&gt;&lt;/i&gt;"</span><span class="op">,</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">placeholder</span><span class="op">:</span>  <span class="st">"Here Bible Reference…"</span><span class="op">,</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="dt">transform</span><span class="op">:</span> superBCV<span class="op">.</span><span class="at">osis_array</span><span class="op">,</span>     <span class="co">// &lt;---- HERE</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">fetcher</span><span class="op">:</span> superBCV<span class="op">.</span><span class="at">fetchPassage</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">//    addLabel: "Add",</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">//    resetLabel: "RAZ",</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">//    clipLabel: "CLIP"</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  })<span class="op">.</span><span class="fu">node</span>()<span class="op">;</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> bsgroup<span class="op">;</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>restyle <span class="op">=</span> {</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Wait until OJS inserts it into the DOM</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> container <span class="op">=</span> viewof refInput2<span class="op">;</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co">//  const group = container.querySelector("div.input-group");</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> allButtons <span class="op">=</span> container<span class="op">.</span><span class="fu">querySelectorAll</span>(<span class="st">"button"</span>)<span class="op">;</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">queueMicrotask</span>(() <span class="kw">=&gt;</span> {</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>   allButtons<span class="op">.</span><span class="fu">forEach</span>(btn <span class="kw">=&gt;</span> {</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>      btn<span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">remove</span>(<span class="st">"btn-quarto"</span>)<span class="op">;</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">"Hey"</span>)</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co">/**  </span></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="co">  const obs = new MutationObserver(() =&gt; {</span></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="co">    allButtons.forEach(btn =&gt; {</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="co">        btn.classList.remove("btn-quarto");</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="co">        });</span></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="co">    });</span></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="co">  obs.observe(container, { childList: true, subtree: true });</span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="co">//refInput2.current   // "John.3.16"</span></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;pre&gt;</span><span class="sc">${</span><span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(refInput2<span class="op">.</span><span class="at">current</span>)<span class="sc">}</span><span class="vs">&lt;/pre&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="27" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 26;"><span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { bsInputAndFetch2 } <span class="im">from</span> <span class="st">"./bsui_debounce.js"</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { super_bcv_parser } <span class="im">from</span> <span class="st">"./bsBcv.js"</span><span class="op">;</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>superBCV <span class="op">=</span> <span class="kw">new</span> <span class="fu">super_bcv_parser</span>() <span class="co">// instance of singleton parser</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co">//dummy = superBCV.parse("Gen1.1"); // warm JIT</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>viewof refInput2 <span class="op">=</span> {</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> bsgroup <span class="op">=</span> <span class="kw">new</span> <span class="fu">bsInputAndFetch2</span>({</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="dt">prefixHTML</span><span class="op">:</span> <span class="st">"&lt;i class='bi bi-book'&gt;&lt;/i&gt;"</span><span class="op">,</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="dt">placeholder</span><span class="op">:</span>  <span class="st">"Here Bible Reference…"</span><span class="op">,</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="dt">transform</span><span class="op">:</span> superBCV<span class="op">.</span><span class="at">osis_array</span><span class="op">,</span>     <span class="co">// &lt;---- HERE</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="dt">fetcher</span><span class="op">:</span> superBCV<span class="op">.</span><span class="at">fetchPassage</span><span class="op">,</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co">//    addLabel: "Add",</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="dt">resetLabel</span><span class="op">:</span> <span class="st">"RAZ"</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co">//    clipLabel: "CLIP"</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  })<span class="op">.</span><span class="fu">node</span>()<span class="op">;</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> bsgroup<span class="op">;</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co">//refInput2.current   // "John.3.16"</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;pre&gt;</span><span class="sc">${</span><span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(refInput2<span class="op">.</span><span class="at">current</span>)<span class="sc">}</span><span class="vs">&lt;/pre&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-1-1" data-nodetype="declaration">
@@ -257,11 +254,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-1-5" data-nodetype="declaration">
+<div id="ojs-cell-1-5" data-nodetype="expression">
 
 </div>
 </div>
 </div>
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="51" data-source-offset="-714"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 50;"><span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>refInput2<span class="op">.</span><span class="at">content</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-1-6" data-nodetype="expression">
@@ -269,10 +267,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="63" data-source-offset="-1234"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 62;"><span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>refInput2<span class="op">.</span><span class="at">content</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="68" data-source-offset="-1125"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 67;"><span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>restyle <span class="op">=</span> {</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Wait until OJS inserts it into the DOM</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> container <span class="op">=</span> viewof refInput2<span class="op">;</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a><span class="co">//  const group = container.querySelector("div.input-group");</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> allButtons <span class="op">=</span> container<span class="op">.</span><span class="fu">querySelectorAll</span>(<span class="st">"button"</span>)<span class="op">;</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">queueMicrotask</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>   allButtons<span class="op">.</span><span class="fu">forEach</span>(btn <span class="kw">=&gt;</span> {</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>      btn<span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">remove</span>(<span class="st">"btn-quarto"</span>)<span class="op">;</span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">"Hey"</span>)</span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-1-7" data-nodetype="expression">
+<div id="ojs-cell-1-7" data-nodetype="declaration">
 
 </div>
 </div>
@@ -283,7 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImltcG9ydCB7IGJzSW5wdXRBbmRGZXRjaCB9IGZyb20gXCIuL2JzdWkuanNcIlxuaW1wb3J0IHsgc3VwZXJfYmN2X3BhcnNlciB9IGZyb20gXCIuL2JzQmN2LmpzXCI7XG5cbnN1cGVyQkNWID0gbmV3IHN1cGVyX2Jjdl9wYXJzZXIoKSAvLyBpbnN0YW5jZSBvZiBzaW5nbGV0b24gcGFyc2VyXG5cbnZpZXdvZiByZWZJbnB1dDIgPSB7XG4gIGNvbnN0IGJzZ3JvdXAgPSBuZXcgYnNJbnB1dEFuZEZldGNoKHtcbiAgICBwcmVmaXhIVE1MOiBcIjxpIGNsYXNzPSdiaSBiaS1ib29rJz48L2k+XCIsXG4gICAgcGxhY2Vob2xkZXI6ICBcIkhlcmUgQmlibGUgUmVmZXJlbmNl4oCmXCIsXG4gICAgdHJhbnNmb3JtOiBzdXBlckJDVi5vc2lzX2FycmF5LCAgICAgLy8gPC0tLS0gSEVSRVxuICAgIGZldGNoZXI6IHN1cGVyQkNWLmZldGNoUGFzc2FnZVxuLy8gICAgYWRkTGFiZWw6IFwiQWRkXCIsXG4vLyAgICByZXNldExhYmVsOiBcIlJBWlwiLFxuLy8gICAgY2xpcExhYmVsOiBcIkNMSVBcIlxuICB9KS5ub2RlKCk7XG5cbiAgcmV0dXJuIGJzZ3JvdXA7XG59XG5cbnJlc3R5bGUgPSB7XG4gIC8vIFdhaXQgdW50aWwgT0pTIGluc2VydHMgaXQgaW50byB0aGUgRE9NXG4gIGNvbnN0IGNvbnRhaW5lciA9IHZpZXdvZiByZWZJbnB1dDI7XG4vLyAgY29uc3QgZ3JvdXAgPSBjb250YWluZXIucXVlcnlTZWxlY3RvcihcImRpdi5pbnB1dC1ncm91cFwiKTtcbiAgXG4gIGNvbnN0IGFsbEJ1dHRvbnMgPSBjb250YWluZXIucXVlcnlTZWxlY3RvckFsbChcImJ1dHRvblwiKTtcblxuICBxdWV1ZU1pY3JvdGFzaygoKSA9PiB7XG4gICBhbGxCdXR0b25zLmZvckVhY2goYnRuID0+IHtcbiAgICAgIGJ0bi5jbGFzc0xpc3QucmVtb3ZlKFwiYnRuLXF1YXJ0b1wiKTtcbiAgICAgIGNvbnNvbGUubG9nKFwiSGV5XCIpXG4gICAgfSk7XG4gIH0pO1xuICBcbi8qKiAgXG4gIGNvbnN0IG9icyA9IG5ldyBNdXRhdGlvbk9ic2VydmVyKCgpID0+IHtcbiAgICBhbGxCdXR0b25zLmZvckVhY2goYnRuID0+IHtcbiAgICAgICAgYnRuLmNsYXNzTGlzdC5yZW1vdmUoXCJidG4tcXVhcnRvXCIpO1xuICAgICAgICB9KTtcbiAgICB9KTtcbiAgICBcbiAgb2JzLm9ic2VydmUoY29udGFpbmVyLCB7IGNoaWxkTGlzdDogdHJ1ZSwgc3VidHJlZTogdHJ1ZSB9KTtcbiovXG59XG5cbi8vcmVmSW5wdXQyLmN1cnJlbnQgICAvLyBcIkpvaG4uMy4xNlwiXG5odG1sYDxwcmU+JHtKU09OLnN0cmluZ2lmeShyZWZJbnB1dDIuY3VycmVudCl9PC9wcmU+YCAgIC8vIFwiSm9obi4zLjE2XCJcblxuLy9yZWZJbnB1dC5hY2N1bSAgICAgLy8gW1wiSm9obi4zLjE2XCIsIC4uLl1cbnJlZklucHV0Mi5jb250ZW50ICAgLy8gc2FuaXRpemVkIHBhc3NhZ2VfaHRtbCBmcm9tIHlvdXIgV29ya2VyXG5cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgncmVmSW5wdXQyJykifV19
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImltcG9ydCB7IGJzSW5wdXRBbmRGZXRjaDIgfSBmcm9tIFwiLi9ic3VpX2RlYm91bmNlLmpzXCJcbmltcG9ydCB7IHN1cGVyX2Jjdl9wYXJzZXIgfSBmcm9tIFwiLi9ic0Jjdi5qc1wiO1xuXG5zdXBlckJDViA9IG5ldyBzdXBlcl9iY3ZfcGFyc2VyKCkgLy8gaW5zdGFuY2Ugb2Ygc2luZ2xldG9uIHBhcnNlclxuLy9kdW1teSA9IHN1cGVyQkNWLnBhcnNlKFwiR2VuMS4xXCIpOyAvLyB3YXJtIEpJVFxuXG52aWV3b2YgcmVmSW5wdXQyID0ge1xuICBjb25zdCBic2dyb3VwID0gbmV3IGJzSW5wdXRBbmRGZXRjaDIoe1xuICAgIHByZWZpeEhUTUw6IFwiPGkgY2xhc3M9J2JpIGJpLWJvb2snPjwvaT5cIixcbiAgICBwbGFjZWhvbGRlcjogIFwiSGVyZSBCaWJsZSBSZWZlcmVuY2XigKZcIixcbiAgICB0cmFuc2Zvcm06IHN1cGVyQkNWLm9zaXNfYXJyYXksICAgICAvLyA8LS0tLSBIRVJFXG4gICAgZmV0Y2hlcjogc3VwZXJCQ1YuZmV0Y2hQYXNzYWdlLFxuLy8gICAgYWRkTGFiZWw6IFwiQWRkXCIsXG4gICAgcmVzZXRMYWJlbDogXCJSQVpcIlxuLy8gICAgY2xpcExhYmVsOiBcIkNMSVBcIlxuICB9KS5ub2RlKCk7XG5cbiAgcmV0dXJuIGJzZ3JvdXA7XG59XG5cbi8vcmVmSW5wdXQyLmN1cnJlbnQgICAvLyBcIkpvaG4uMy4xNlwiXG5odG1sYDxwcmU+JHtKU09OLnN0cmluZ2lmeShyZWZJbnB1dDIuY3VycmVudCl9PC9wcmU+YCAgIC8vIFwiSm9obi4zLjE2XCJcblxuLy9yZWZJbnB1dC5hY2N1bSAgICAgLy8gW1wiSm9obi4zLjE2XCIsIC4uLl1cbnJlZklucHV0Mi5jb250ZW50ICAgLy8gc2FuaXRpemVkIHBhc3NhZ2VfaHRtbCBmcm9tIHlvdXIgV29ya2VyXG5cblxuLy8gRG9uJ3QgdXNlIGxpc3RlbmVyczsganVzdCBkZWZpbmUgdGhlIHByb21pc2UuXG4vLyBPSlMgd2lsbCB3YWl0IGZvciAnZGF0YScgdG8gcmVzb2x2ZSBiZWZvcmUgcnVubmluZyBjZWxscyB0aGF0IGRlcGVuZCBvbiBpdC5cblxuLyoqXG5kYXRhID0ge1xuICBjb25zdCByZXNwb25zZSA9IGF3YWl0IHJlZklucHV0Mi5jb250ZW50OyAgIC8vIHNhbml0aXplZCBwYXNzYWdlX2h0bWwgZnJvbSB5b3VyIFdvcmtlclxuICBpZiAoIXJlc3BvbnNlKSB0aHJvdyBuZXcgRXJyb3IoXCJGZXRjaCBmYWlsZWRcIik7XG4gIHJldHVybiByZXNwb25zZTtcbn1cblxuZGF0YVxuKi9cblxuLy8gd29ya3MgT0sgYXQgbGVhc3Qgb24gZmlyc3Qgb25lXG5yZXN0eWxlID0ge1xuICAvLyBXYWl0IHVudGlsIE9KUyBpbnNlcnRzIGl0IGludG8gdGhlIERPTVxuICBjb25zdCBjb250YWluZXIgPSB2aWV3b2YgcmVmSW5wdXQyO1xuLy8gIGNvbnN0IGdyb3VwID0gY29udGFpbmVyLnF1ZXJ5U2VsZWN0b3IoXCJkaXYuaW5wdXQtZ3JvdXBcIik7XG4gIFxuICBjb25zdCBhbGxCdXR0b25zID0gY29udGFpbmVyLnF1ZXJ5U2VsZWN0b3JBbGwoXCJidXR0b25cIik7XG5cbiAgcXVldWVNaWNyb3Rhc2soKCkgPT4ge1xuICAgYWxsQnV0dG9ucy5mb3JFYWNoKGJ0biA9PiB7XG4gICAgICBidG4uY2xhc3NMaXN0LnJlbW92ZShcImJ0bi1xdWFydG9cIik7XG4gICAgICBjb25zb2xlLmxvZyhcIkhleVwiKVxuICAgIH0pO1xuICB9KTtcbn0gIFxuXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ3JlZklucHV0MicpIn1dfQ==
 </script>
 <script type="module">
 if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }

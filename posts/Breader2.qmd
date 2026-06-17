@@ -1,11 +1,14 @@
 ---
-title: Breader
+title: Breader2
 subtitle: "just get'em"
 execute:
   echo: false
 ---
 
 > _bsInput_ --> _validate/fetch_ --> _display_
+
+- OK x=> x echo input
+- next x=> osis
 
 - super_bcv_parser does _the validation_ of an input string and 
 - bsInputAndDebounce manages _the UI_, reacts with a _transform/validation_ method, triggers the _fetch_
@@ -25,9 +28,9 @@ Fix: is input is unchanged from previous dont trigger the fetch
 
 ```{ojs}
 import { bsInputAndFetch2 } from "./bsui_debounce.js"
-import { super_bcv_parser } from "./bsBcv.js";
+import { SuperParser } from "./bsBcv2.js";
 
-superBCV = new super_bcv_parser() // instance of singleton parser
+superBCV = new SuperParser(); // instance of singleton parser
 //dummy = superBCV.parse("Gen1.1"); // warm JIT
 
 viewof refInput2 = {
@@ -35,7 +38,11 @@ viewof refInput2 = {
     prefixHTML: "<i class='bi bi-book'></i>",
     placeholder:  "Here Bible Reference…",
     transform: superBCV.osis_array,     // <---- HERE
-    fetcher: superBCV.fetchPassage,
+//    transform:  superBCV.parseOsis,     // <---- HERE
+//    fetcher: superBCV.fetchPassage,
+    fetcher: superBCV.fetch_json,
+//    fetcher: superBCV.fetch,
+    parsingInspector: superBCV.parsingInspector,
 //    addLabel: "Add",
     resetLabel: "RAZ"
 //    clipLabel: "CLIP"

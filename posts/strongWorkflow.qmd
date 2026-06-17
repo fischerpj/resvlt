@@ -1,0 +1,14 @@
+---
+title: Strong Study Workflow
+subtitle: "methodology"
+execute:
+  echo: false
+---
+
+> follow StrongNumber from KJV to blueletterbible resources.
+
+```{mermaid}
+graph LR
+  KJV::strongNumber --> blueletterbible
+```
+

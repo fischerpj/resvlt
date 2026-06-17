@@ -1,0 +1,26 @@
+---
+title: Widgets
+subtitle: "just get'em"
+execute:
+  echo: false
+---
+
+::: {#inputDiv}
+<!-- inputDiv is considered Void-->
+:::
+
+```{ojs}
+// Import classes
+import { InputGroup, SuperParserFetcher } from "./widgets.js"
+
+// Instantiate widgets
+inputWidget = new InputGroup(html)
+viewof input = inputWidget.element
+
+displayWidget = new SuperParserFetcher(html)
+viewof display = displayWidget.element
+
+// Reactive wiring: this cell re-runs whenever inputWidget.value changes
+displayWidget.update(inputWidget.value)
+
+```

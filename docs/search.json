@@ -25,14 +25,14 @@
     "href": "posts/Breader.html",
     "title": "Breader",
     "section": "",
-    "text": "bsInput –&gt; validate/fetch –&gt; display.\n\n\n\n\n\nimport { bsInputAndFetch } from \"./bsui.js\"\nimport { super_bcv_parser } from \"./bsBcv.js\";\n\nsuperBCV = new super_bcv_parser() // instance of singleton parser\n\nviewof refInput2 = {\n  const bsgroup = new bsInputAndFetch({\n    prefixHTML: \"&lt;i class='bi bi-book'&gt;&lt;/i&gt;\",\n    placeholder:  \"Here Bible Reference…\",\n    transform: superBCV.osis_array,     // &lt;---- HERE\n    fetcher: superBCV.fetchPassage\n//    addLabel: \"Add\",\n//    resetLabel: \"RAZ\",\n//    clipLabel: \"CLIP\"\n  }).node();\n\n  return bsgroup;\n}\n\nrestyle = {\n  // Wait until OJS inserts it into the DOM\n  const container = viewof refInput2;\n//  const group = container.querySelector(\"div.input-group\");\n  \n  const allButtons = container.querySelectorAll(\"button\");\n\n  queueMicrotask(() =&gt; {\n   allButtons.forEach(btn =&gt; {\n      btn.classList.remove(\"btn-quarto\");\n      console.log(\"Hey\")\n    });\n  });\n  \n/**  \n  const obs = new MutationObserver(() =&gt; {\n    allButtons.forEach(btn =&gt; {\n        btn.classList.remove(\"btn-quarto\");\n        });\n    });\n    \n  obs.observe(container, { childList: true, subtree: true });\n*/\n}\n\n//refInput2.current   // \"John.3.16\"\nhtml`&lt;pre&gt;${JSON.stringify(refInput2.current)}&lt;/pre&gt;`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrefInput2.content"
+    "text": "bsInput –&gt; validate/fetch –&gt; display\n\n\nsuper_bcv_parser does the validation of an input string and\nbsInputAndDebounce manages the UI, reacts with a transform/validation method, triggers the fetch\n\n\n\n\n\n\ngraph LR\n  bsInputAndDebounce --&gt; super_bcv_parser\n\n\n\n\n\n\nAttention! uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received Fix: is input is unchanged from previous dont trigger the fetch\n\n\n\n\nimport { bsInputAndFetch2 } from \"./bsui_debounce.js\"\nimport { super_bcv_parser } from \"./bsBcv.js\";\n\nsuperBCV = new super_bcv_parser() // instance of singleton parser\n//dummy = superBCV.parse(\"Gen1.1\"); // warm JIT\n\nviewof refInput2 = {\n  const bsgroup = new bsInputAndFetch2({\n    prefixHTML: \"&lt;i class='bi bi-book'&gt;&lt;/i&gt;\",\n    placeholder:  \"Here Bible Reference…\",\n    transform: superBCV.osis_array,     // &lt;---- HERE\n    fetcher: superBCV.fetchPassage,\n//    addLabel: \"Add\",\n    resetLabel: \"RAZ\"\n//    clipLabel: \"CLIP\"\n  }).node();\n\n  return bsgroup;\n}\n\n//refInput2.current   // \"John.3.16\"\nhtml`&lt;pre&gt;${JSON.stringify(refInput2.current)}&lt;/pre&gt;`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrefInput2.content\n\n\n\n\n\n\n\nrestyle = {\n  // Wait until OJS inserts it into the DOM\n  const container = viewof refInput2;\n//  const group = container.querySelector(\"div.input-group\");\n  \n  const allButtons = container.querySelectorAll(\"button\");\n\n  queueMicrotask(() =&gt; {\n   allButtons.forEach(btn =&gt; {\n      btn.classList.remove(\"btn-quarto\");\n      console.log(\"Hey\")\n    });\n  });\n}"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Svlt2",
     "section": "",
-    "text": "Breader\n\n\njust get’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBsParser\n\n\nvalid’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBsUi\n\n\nemulat’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOsisParserUI\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVerse Workflow\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBCV\n\n\nread’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nquarto-svelte example\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "BMix\n\n\nBootstrap Mix of JS & Svelte\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBreader\n\n\njust get’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBreader2\n\n\njust get’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBsParser\n\n\nvalid’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBsUi\n\n\nemulat’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOsisParserUI\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVerse Workflow\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBCV\n\n\nread’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nechoInput\n\n\nBootstrap Mix of JS & Svelte\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nquarto-svelte example\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrefui\n\n\nInput_Bar.js with a) OJS contract b) Boostrap Style c) embedded bcv_parser\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStrong Study Workflow\n\n\nmethodology\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWidgets\n\n\njust get’em\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -61,5 +61,54 @@
     "title": "BCV",
     "section": "",
     "text": "todo: create an inputGroup with Prefix valid Input\n\n\n\n\n\nimport { bsInput } from \"./bsui.js\"\nimport { super_bcv_parser } from \"./bsBcv.js\";\n\nviewof refInput2 = {\n  const bsgroup = new bsInput().node();\n  return bsgroup;\n}"
+  },
+  {
+    "objectID": "posts/Breader2.html",
+    "href": "posts/Breader2.html",
+    "title": "Breader2",
+    "section": "",
+    "text": "bsInput –&gt; validate/fetch –&gt; display\n\n\nOK x=&gt; x echo input\nnext x=&gt; osis\nsuper_bcv_parser does the validation of an input string and\nbsInputAndDebounce manages the UI, reacts with a transform/validation method, triggers the fetch\n\n\n\n\n\n\ngraph LR\n  bsInputAndDebounce --&gt; super_bcv_parser\n\n\n\n\n\n\nAttention! uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received Fix: is input is unchanged from previous dont trigger the fetch\n\n\n\n\nimport { bsInputAndFetch2 } from \"./bsui_debounce.js\"\nimport { SuperParser } from \"./bsBcv2.js\";\n\nsuperBCV = new SuperParser(); // instance of singleton parser\n//dummy = superBCV.parse(\"Gen1.1\"); // warm JIT\n\nviewof refInput2 = {\n  const bsgroup = new bsInputAndFetch2({\n    prefixHTML: \"&lt;i class='bi bi-book'&gt;&lt;/i&gt;\",\n    placeholder:  \"Here Bible Reference…\",\n    transform: superBCV.osis_array,     // &lt;---- HERE\n//    transform:  superBCV.parseOsis,     // &lt;---- HERE\n//    fetcher: superBCV.fetchPassage,\n    fetcher: superBCV.fetch_json,\n//    fetcher: superBCV.fetch,\n    parsingInspector: superBCV.parsingInspector,\n//    addLabel: \"Add\",\n    resetLabel: \"RAZ\"\n//    clipLabel: \"CLIP\"\n  }).node();\n\n  return bsgroup;\n}\n\n//refInput2.current   // \"John.3.16\"\nhtml`&lt;pre&gt;${JSON.stringify(refInput2.current)}&lt;/pre&gt;`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrefInput2.content\n\n\n\n\n\n\n\nrestyle = {\n  // Wait until OJS inserts it into the DOM\n  const container = viewof refInput2;\n//  const group = container.querySelector(\"div.input-group\");\n  \n  const allButtons = container.querySelectorAll(\"button\");\n\n  queueMicrotask(() =&gt; {\n   allButtons.forEach(btn =&gt; {\n      btn.classList.remove(\"btn-quarto\");\n      console.log(\"Hey\")\n    });\n  });\n}"
+  },
+  {
+    "objectID": "posts/widgets.html",
+    "href": "posts/widgets.html",
+    "title": "Widgets",
+    "section": "",
+    "text": "import { InputGroup, SuperParserFetcher } from \"./widgets.js\"\n\n// Instantiate widgets\ninputWidget = new InputGroup(html)\nviewof input = inputWidget.element\n\ndisplayWidget = new SuperParserFetcher(html)\nviewof display = displayWidget.element\n\n// Reactive wiring: this cell re-runs whenever inputWidget.value changes\ndisplayWidget.update(inputWidget.value)"
+  },
+  {
+    "objectID": "posts/BreaderMix.html",
+    "href": "posts/BreaderMix.html",
+    "title": "BreaderMix",
+    "section": "",
+    "text": "import { bsInputBar } from \"./bsui_widgets.js\"\nimport { SuperParser } from \"./bsBcv2.js\";\n\nsuperBCV = new SuperParser(); // instance of singleton parser\n\nviewof refInput2 = {\n  const bsgroup = new bsInputBar({\n    prefixHTML: \"&lt;i class='bi bi-book'&gt;&lt;/i&gt;\",\n    placeholder:  \"Here Bible Reference…\",\n    transform: x =&gt; x,     // &lt;---- HERE\n//    transform:  superBCV.parseOsis,     // &lt;---- HERE\n//    fetcher: superBCV.fetchPassage,\n    fetcher: superBCV.fetch_json,\n//    fetcher: superBCV.fetch,\n    parsingInspector: superBCV.parsingInspector,\n//    addLabel: \"Add\",\n    resetLabel: \"RAZ\"\n//    clipLabel: \"CLIP\"\n  }).node();\n\n  return bsgroup;\n}\n\n//refInput2.current   // \"John.3.16\"\nhtml`&lt;pre&gt;${JSON.stringify(refInput2.current)}&lt;/pre&gt;`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrefInput2.content\n\n\n\n\n\n\n\nrestyle = {\n  // Wait until OJS inserts it into the DOM\n  const container = viewof refInput2;\n//  const group = container.querySelector(\"div.input-group\");\n  \n  const allButtons = container.querySelectorAll(\"button\");\n\n  queueMicrotask(() =&gt; {\n   allButtons.forEach(btn =&gt; {\n      btn.classList.remove(\"btn-quarto\");\n      console.log(\"Hey\")\n    });\n  });\n}"
+  },
+  {
+    "objectID": "posts/BMix.html",
+    "href": "posts/BMix.html",
+    "title": "BMix",
+    "section": "",
+    "text": "Two components: Input [input, button, parser.transform = parse + url returns {url} & Output\n\n\n\n\n\nimport { bsInputBar } from \"./bsui_widgets.js\"\nimport { SuperParserFetcher } from \"./superParserFetcher.js\";\n\nsuperBCV = new SuperParserFetcher(); // instance of singleton parser\n\nviewof refInput2 = {\n  const bsgroup = new bsInputBar({\n    prefixHTML: \"&lt;i class='bi bi-book'&gt;&lt;/i&gt;\",\n    placeholder:  \"Here Bible Reference…\",\n//    transform: x =&gt; x,     // &lt;---- HERE\n    transform:  superBCV.parse_inspect,     // &lt;---- HERE\n//    fetcher: superBCV.fetchPassage,\n    fetcher: superBCV.fetch_ready,\n//    fetcher: superBCV.fetch,\n    parsingInspector: superBCV.parsingInspector,\n//    addLabel: \"Add\",\n    resetLabel: \"RAZ\"\n//    clipLabel: \"CLIP\"\n  }).node();\n\n  return bsgroup;\n}\n\n//refInput2.current   // \"John.3.16\"\n//html`&lt;pre&gt;${JSON.stringify(refInput2.current,null,2)}&lt;/pre&gt;`   // \"John.3.16\"\nhtml`&lt;pre&gt;${JSON.stringify(refInput2.payload,null,2)}&lt;/pre&gt;`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrestyle = {\n  // Wait until OJS inserts it into the DOM\n  const container = viewof refInput2;\n//  const group = container.querySelector(\"div.input-group\");\n  \n  const allButtons = container.querySelectorAll(\"button\");\n\n  queueMicrotask(() =&gt; {\n   allButtons.forEach(btn =&gt; {\n      btn.classList.remove(\"btn-quarto\");\n      console.log(\"Hey\")\n    });\n  });\n}"
+  },
+  {
+    "objectID": "posts/echoInput.html",
+    "href": "posts/echoInput.html",
+    "title": "echoInput",
+    "section": "",
+    "text": "import {EchoInput} from \"./bsui_widgets.js\";\n\n// Instantiate the widget\nviewof echo = new EchoInput({\n  placeholder: \"Type something…\",\n  oninput: v =&gt; console.log(\"Callback:\", v)\n});\n\n// Mount into a DOM container\necho.mount(html`&lt;div&gt;&lt;/div&gt;`);"
+  },
+  {
+    "objectID": "posts/refui.html",
+    "href": "posts/refui.html",
+    "title": "refui",
+    "section": "",
+    "text": "import { bsInput, RefEngine } from \"./refui.js\";\n  \n  engine = new RefEngine({\n    baseUrl: \"https://hmi.pjafischer.workers.dev/bgw/cache/\"\n  });\n  \n  viewof ref = new bsInput({\n    prefixHTML: \"&lt;i class='bi bi-book'&gt;&lt;/i&gt;\",\n    placeholder: \"Enter reference\",\n    addLabel: \"Add\",\n    resetLabel: \"RAZ\",\n    transform: (txt, prev) =&gt; engine.transform(txt, prev)\n  }).node();\n\n  // ref; // {osis, previousOsis, url_fetchable, response{..., duration,content}}\n  ref.response ? ref.response.content : \"waiting for input\";\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrestyle = {\n  // Wait until OJS inserts it into the DOM\n  const container = viewof ref;\n//  const group = container.querySelector(\"div.input-group\");\n  \n  const allButtons = container.querySelectorAll(\"button\");\n\n  queueMicrotask(() =&gt; {\n   allButtons.forEach(btn =&gt; {\n      btn.classList.remove(\"btn-quarto\");\n      console.log(\"Hey\")\n    });\n  });\n}"
+  },
+  {
+    "objectID": "posts/strongWorkflow.html",
+    "href": "posts/strongWorkflow.html",
+    "title": "Strong Study Workflow",
+    "section": "",
+    "text": "follow StrongNumber from KJV to blueletterbible resources.\n\n\n\n\n\n\ngraph LR\n  KJV::strongNumber --&gt; blueletterbible"
   }
 ]

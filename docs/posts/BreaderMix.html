@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Svlt2 – Resvlt</title>
+<title>BreaderMix – Resvlt</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-d4d76bf8491c20bad77d141916dc28e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-f222958fd40643b5f55e2db260ddc64c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-d4d76bf8491c20bad77d141916dc28e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-f222958fd40643b5f55e2db260ddc64c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,77 +100,21 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
+<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-title','listing-author','listing-subtitle','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Resvlt</span>
     </a>
   </div>
@@ -149,7 +125,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -172,13 +148,14 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Svlt2</h1>
+    <div class="quarto-title column-body">
+      <h1 class="title">BreaderMix</h1>
+            <p class="subtitle lead">JS &amp; Svelte</p>
                       </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
       
     
@@ -186,325 +163,126 @@ window.Quarto = {
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(13)</span></div></div></div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1780776073701" data-listing-reading-time-sort="2" data-listing-word-count-sort="270">
-<div class="thumbnail">
-<p><a href="./posts/BMix.html" class="no-external"></a></p><a href="./posts/BMix.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/BMix.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/BMix.html" class="no-external">BMix</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/BMix.html" class="no-external">Bootstrap Mix of JS &amp; Svelte</a>
-</div>
-<div class="listing-description">
-<a href="./posts/BMix.html" class="no-external">Two components: Input [input, button, parser.transform = parse + url returns {url} &amp; Output</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./posts/BMix.html" class="no-external"></a></p><a href="./posts/BMix.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1779018465926" data-listing-reading-time-sort="2" data-listing-word-count-sort="291">
-<div class="thumbnail">
-<p><a href="./posts/Breader.html" class="no-external"></a></p><a href="./posts/Breader.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/Breader.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Breader.html" class="no-external">Breader</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Breader.html" class="no-external">just get’em</a>
-</div>
-<div class="listing-description">
-<a href="./posts/Breader.html" class="no-external"><em>bsInput</em> –&gt; <em>validate/fetch</em> –&gt; <em>display</em></a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./posts/Breader.html" class="no-external"></a></p><a href="./posts/Breader.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-file-modified-sort="1779446050754" data-listing-reading-time-sort="2" data-listing-word-count-sort="327">
-<div class="thumbnail">
-<p><a href="./posts/Breader2.html" class="no-external"></a></p><a href="./posts/Breader2.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/Breader2.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Breader2.html" class="no-external">Breader2</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Breader2.html" class="no-external">just get’em</a>
-</div>
-<div class="listing-description">
-<a href="./posts/Breader2.html" class="no-external"><em>bsInput</em> –&gt; <em>validate/fetch</em> –&gt; <em>display</em></a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./posts/Breader2.html" class="no-external"></a></p><a href="./posts/Breader2.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-listing-file-modified-sort="1778683310528" data-listing-reading-time-sort="2" data-listing-word-count-sort="293">
-<div class="thumbnail">
-<p><a href="./posts/BsParser.html" class="no-external"></a></p><a href="./posts/BsParser.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/BsParser.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/BsParser.html" class="no-external">BsParser</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/BsParser.html" class="no-external">valid’em</a>
-</div>
-<div class="listing-description">
-<a href="./posts/BsParser.html" class="no-external">Validate an bsInput with one super_bcv_wrapper</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./posts/BsParser.html" class="no-external"></a></p><a href="./posts/BsParser.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-listing-file-modified-sort="1778581301371" data-listing-reading-time-sort="1" data-listing-word-count-sort="159">
-<div class="thumbnail">
-<p><a href="./posts/BsUi.html" class="no-external"></a></p><a href="./posts/BsUi.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/BsUi.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/BsUi.html" class="no-external">BsUi</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/BsUi.html" class="no-external">emulat’em</a>
-</div>
-<div class="listing-description">
-<a href="./posts/BsUi.html" class="no-external">FIX OK .current, .accu OK restyle with queueMicrotask and MutationObserver OK transform</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./posts/BsUi.html" class="no-external"></a></p><a href="./posts/BsUi.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-listing-file-modified-sort="1778570666703" data-listing-reading-time-sort="1" data-listing-word-count-sort="54">
-<div class="thumbnail">
-<p><a href="./posts/OsisParserUI.html" class="no-external"></a></p><a href="./posts/OsisParserUI.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/OsisParserUI.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/OsisParserUI.html" class="no-external">OsisParserUI</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/OsisParserUI.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/OsisParserUI.html" class="no-external">strict idempotent OSIS conversion - <em>Intra component communication via windows.store</em>. TODO: H-store vs O-store</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./posts/OsisParserUI.html" class="no-external"></a></p><a href="./posts/OsisParserUI.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-listing-file-modified-sort="1778581070321" data-listing-reading-time-sort="1" data-listing-word-count-sort="68">
-<div class="thumbnail">
-<p><a href="./posts/VerseWorkflow.html" class="no-external"></a></p><a href="./posts/VerseWorkflow.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/VerseWorkflow.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/VerseWorkflow.html" class="no-external">Verse Workflow</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/VerseWorkflow.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/VerseWorkflow.html" class="no-external">For Bible Reference From UserInput To Display</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./posts/VerseWorkflow.html" class="no-external"></a></p><a href="./posts/VerseWorkflow.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-listing-file-modified-sort="1778613421012" data-listing-reading-time-sort="1" data-listing-word-count-sort="37">
-<div class="thumbnail">
-<p><a href="./posts/bcv.html" class="no-external"></a></p><a href="./posts/bcv.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/bcv.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/bcv.html" class="no-external">BCV</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/bcv.html" class="no-external">read’em</a>
-</div>
-<div class="listing-description">
-<a href="./posts/bcv.html" class="no-external">todo: create an inputGroup with Prefix valid Input</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./posts/bcv.html" class="no-external"></a></p><a href="./posts/bcv.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-listing-file-modified-sort="1780744277558" data-listing-reading-time-sort="1" data-listing-word-count-sort="52">
-<div class="thumbnail">
-<p><a href="./posts/echoInput.html" class="no-external"></a></p><a href="./posts/echoInput.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/echoInput.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/echoInput.html" class="no-external">echoInput</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/echoInput.html" class="no-external">Bootstrap Mix of JS &amp; Svelte</a>
-</div>
-<div class="listing-description">
-<a href="./posts/echoInput.html" class="no-external">
+<div id="inputDiv">
 <!-- inputDiv is considered Void-->
-<!-- ========================================================= -->
-<!-- ===============  FILE: Quarto OJS chunk  ================= -->
-<!-- ========================================================= -->
-</a>
 </div>
-</div>
-<div class="metadata">
-<p><a href="./posts/echoInput.html" class="no-external"></a></p><a href="./posts/echoInput.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="9" data-listing-file-modified-sort="1778579848805" data-listing-reading-time-sort="1" data-listing-word-count-sort="148">
-<div class="thumbnail">
-<p><a href="./posts/example.html" class="no-external"></a></p><a href="./posts/example.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/example.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/example.html" class="no-external">quarto-svelte example</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/example.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/example.html" class="no-external">This document shows you how to use a basic example Svelte component called <code>Circles.svelte</code>.</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./posts/example.html" class="no-external"></a></p><a href="./posts/example.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="10" data-listing-file-modified-sort="1781706212509" data-listing-reading-time-sort="2" data-listing-word-count-sort="220">
-<div class="thumbnail">
-<p><a href="./posts/refui.html" class="no-external"></a></p><a href="./posts/refui.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/refui.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/refui.html" class="no-external">refui</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/refui.html" class="no-external">Input_Bar.js with a) OJS contract b) Boostrap Style c) embedded bcv_parser</a>
-</div>
-<div class="listing-description">
-<a href="./posts/refui.html" class="no-external">
-<!-- inputDiv is considered Void-->
-</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./posts/refui.html" class="no-external"></a></p><a href="./posts/refui.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="11" data-listing-file-modified-sort="1781532542930" data-listing-reading-time-sort="1" data-listing-word-count-sort="13">
-<div class="thumbnail">
-<p><a href="./posts/strongWorkflow.html" class="no-external"></a></p><a href="./posts/strongWorkflow.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/strongWorkflow.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/strongWorkflow.html" class="no-external">Strong Study Workflow</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/strongWorkflow.html" class="no-external">methodology</a>
-</div>
-<div class="listing-description">
-<a href="./posts/strongWorkflow.html" class="no-external">follow StrongNumber from KJV to blueletterbible resources.</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./posts/strongWorkflow.html" class="no-external"></a></p><a href="./posts/strongWorkflow.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="12" data-listing-file-modified-sort="1779479202257" data-listing-reading-time-sort="1" data-listing-word-count-sort="36">
-<div class="thumbnail">
-<p><a href="./posts/widgets.html" class="no-external"></a></p><a href="./posts/widgets.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/widgets.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/widgets.html" class="no-external">Widgets</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/widgets.html" class="no-external">just get’em</a>
-</div>
-<div class="listing-description">
-<a href="./posts/widgets.html" class="no-external">
-<!-- inputDiv is considered Void-->
-</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./posts/widgets.html" class="no-external"></a></p><a href="./posts/widgets.html" class="no-external">
-</a>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="14" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 13;"><span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { bsInputBar } <span class="im">from</span> <span class="st">"./bsui_widgets.js"</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { SuperParser } <span class="im">from</span> <span class="st">"./bsBcv2.js"</span><span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>superBCV <span class="op">=</span> <span class="kw">new</span> <span class="fu">SuperParser</span>()<span class="op">;</span> <span class="co">// instance of singleton parser</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>viewof refInput2 <span class="op">=</span> {</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> bsgroup <span class="op">=</span> <span class="kw">new</span> <span class="fu">bsInputBar</span>({</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">prefixHTML</span><span class="op">:</span> <span class="st">"&lt;i class='bi bi-book'&gt;&lt;/i&gt;"</span><span class="op">,</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">placeholder</span><span class="op">:</span>  <span class="st">"Here Bible Reference…"</span><span class="op">,</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">transform</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span>     <span class="co">// &lt;---- HERE</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">//    transform:  superBCV.parseOsis,     // &lt;---- HERE</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">//    fetcher: superBCV.fetchPassage,</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="dt">fetcher</span><span class="op">:</span> superBCV<span class="op">.</span><span class="at">fetch_json</span><span class="op">,</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">//    fetcher: superBCV.fetch,</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="dt">parsingInspector</span><span class="op">:</span> superBCV<span class="op">.</span><span class="at">parsingInspector</span><span class="op">,</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co">//    addLabel: "Add",</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="dt">resetLabel</span><span class="op">:</span> <span class="st">"RAZ"</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co">//    clipLabel: "CLIP"</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  })<span class="op">.</span><span class="fu">node</span>()<span class="op">;</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> bsgroup<span class="op">;</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co">//refInput2.current   // "John.3.16"</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;pre&gt;</span><span class="sc">${</span><span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(refInput2<span class="op">.</span><span class="at">current</span>)<span class="sc">}</span><span class="vs">&lt;/pre&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
 </div>
 </div>
 </div>
-<div class="listing-no-matching d-none">
-No matching items
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
 </div>
-</div></main> <!-- /main -->
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-5" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="41" data-source-offset="-804"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 40;"><span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>refInput2<span class="op">.</span><span class="at">content</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-6" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="58" data-source-offset="-1215"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 57;"><span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>restyle <span class="op">=</span> {</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Wait until OJS inserts it into the DOM</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> container <span class="op">=</span> viewof refInput2<span class="op">;</span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="co">//  const group = container.querySelector("div.input-group");</span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> allButtons <span class="op">=</span> container<span class="op">.</span><span class="fu">querySelectorAll</span>(<span class="st">"button"</span>)<span class="op">;</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">queueMicrotask</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>   allButtons<span class="op">.</span><span class="fu">forEach</span>(btn <span class="kw">=&gt;</span> {</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>      btn<span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">remove</span>(<span class="st">"btn-quarto"</span>)<span class="op">;</span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">"Hey"</span>)</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-7" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImltcG9ydCB7IGJzSW5wdXRCYXIgfSBmcm9tIFwiLi9ic3VpX3dpZGdldHMuanNcIlxuaW1wb3J0IHsgU3VwZXJQYXJzZXIgfSBmcm9tIFwiLi9ic0JjdjIuanNcIjtcblxuc3VwZXJCQ1YgPSBuZXcgU3VwZXJQYXJzZXIoKTsgLy8gaW5zdGFuY2Ugb2Ygc2luZ2xldG9uIHBhcnNlclxuXG52aWV3b2YgcmVmSW5wdXQyID0ge1xuICBjb25zdCBic2dyb3VwID0gbmV3IGJzSW5wdXRCYXIoe1xuICAgIHByZWZpeEhUTUw6IFwiPGkgY2xhc3M9J2JpIGJpLWJvb2snPjwvaT5cIixcbiAgICBwbGFjZWhvbGRlcjogIFwiSGVyZSBCaWJsZSBSZWZlcmVuY2XigKZcIixcbiAgICB0cmFuc2Zvcm06IHggPT4geCwgICAgIC8vIDwtLS0tIEhFUkVcbi8vICAgIHRyYW5zZm9ybTogIHN1cGVyQkNWLnBhcnNlT3NpcywgICAgIC8vIDwtLS0tIEhFUkVcbi8vICAgIGZldGNoZXI6IHN1cGVyQkNWLmZldGNoUGFzc2FnZSxcbiAgICBmZXRjaGVyOiBzdXBlckJDVi5mZXRjaF9qc29uLFxuLy8gICAgZmV0Y2hlcjogc3VwZXJCQ1YuZmV0Y2gsXG4gICAgcGFyc2luZ0luc3BlY3Rvcjogc3VwZXJCQ1YucGFyc2luZ0luc3BlY3Rvcixcbi8vICAgIGFkZExhYmVsOiBcIkFkZFwiLFxuICAgIHJlc2V0TGFiZWw6IFwiUkFaXCJcbi8vICAgIGNsaXBMYWJlbDogXCJDTElQXCJcbiAgfSkubm9kZSgpO1xuXG4gIHJldHVybiBic2dyb3VwO1xufVxuXG4vL3JlZklucHV0Mi5jdXJyZW50ICAgLy8gXCJKb2huLjMuMTZcIlxuaHRtbGA8cHJlPiR7SlNPTi5zdHJpbmdpZnkocmVmSW5wdXQyLmN1cnJlbnQpfTwvcHJlPmAgICAvLyBcIkpvaG4uMy4xNlwiXG5cbi8vcmVmSW5wdXQuYWNjdW0gICAgIC8vIFtcIkpvaG4uMy4xNlwiLCAuLi5dXG5yZWZJbnB1dDIuY29udGVudCAgIC8vIHNhbml0aXplZCBwYXNzYWdlX2h0bWwgZnJvbSB5b3VyIFdvcmtlclxuXG5cbi8vIERvbid0IHVzZSBsaXN0ZW5lcnM7IGp1c3QgZGVmaW5lIHRoZSBwcm9taXNlLlxuLy8gT0pTIHdpbGwgd2FpdCBmb3IgJ2RhdGEnIHRvIHJlc29sdmUgYmVmb3JlIHJ1bm5pbmcgY2VsbHMgdGhhdCBkZXBlbmQgb24gaXQuXG5cbi8qKlxuZGF0YSA9IHtcbiAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCByZWZJbnB1dDIuY29udGVudDsgICAvLyBzYW5pdGl6ZWQgcGFzc2FnZV9odG1sIGZyb20geW91ciBXb3JrZXJcbiAgaWYgKCFyZXNwb25zZSkgdGhyb3cgbmV3IEVycm9yKFwiRmV0Y2ggZmFpbGVkXCIpO1xuICByZXR1cm4gcmVzcG9uc2U7XG59XG5cbmRhdGFcbiovXG5cbi8vIHdvcmtzIE9LIGF0IGxlYXN0IG9uIGZpcnN0IG9uZVxucmVzdHlsZSA9IHtcbiAgLy8gV2FpdCB1bnRpbCBPSlMgaW5zZXJ0cyBpdCBpbnRvIHRoZSBET01cbiAgY29uc3QgY29udGFpbmVyID0gdmlld29mIHJlZklucHV0Mjtcbi8vICBjb25zdCBncm91cCA9IGNvbnRhaW5lci5xdWVyeVNlbGVjdG9yKFwiZGl2LmlucHV0LWdyb3VwXCIpO1xuICBcbiAgY29uc3QgYWxsQnV0dG9ucyA9IGNvbnRhaW5lci5xdWVyeVNlbGVjdG9yQWxsKFwiYnV0dG9uXCIpO1xuXG4gIHF1ZXVlTWljcm90YXNrKCgpID0+IHtcbiAgIGFsbEJ1dHRvbnMuZm9yRWFjaChidG4gPT4ge1xuICAgICAgYnRuLmNsYXNzTGlzdC5yZW1vdmUoXCJidG4tcXVhcnRvXCIpO1xuICAgICAgY29uc29sZS5sb2coXCJIZXlcIilcbiAgICB9KTtcbiAgfSk7XG59ICBcblxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdyZWZJbnB1dDInKSJ9XX0=
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../posts";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -1,0 +1,29 @@
+---
+title: echoInput
+subtitle: "Bootstrap Mix of JS & Svelte"
+execute:
+  echo: false
+---
+
+
+::: {#inputDiv}
+<!-- inputDiv is considered Void-->
+<!-- ========================================================= -->
+<!-- ===============  FILE: Quarto OJS chunk  ================= -->
+<!-- ========================================================= -->
+:::
+
+
+```{ojs}
+// Import the class from the external JS module
+import {EchoInput} from "./bsui_widgets.js";
+
+// Instantiate the widget
+viewof echo = new EchoInput({
+  placeholder: "Type something…",
+  oninput: v => console.log("Callback:", v)
+});
+
+// Mount into a DOM container
+echo.mount(html`<div></div>`);
+```

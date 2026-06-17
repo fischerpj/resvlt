@@ -1,41 +1,33 @@
 ---
-title: Breader
-subtitle: "just get'em"
+title: BMix
+subtitle: "Bootstrap Mix of JS & Svelte"
 execute:
   echo: false
 ---
 
-> _bsInput_ --> _validate/fetch_ --> _display_
-
-- super_bcv_parser does _the validation_ of an input string and 
-- bsInputAndDebounce manages _the UI_, reacts with a _transform/validation_ method, triggers the _fetch_
-
-```{mermaid}
-graph LR
-  bsInputAndDebounce --> super_bcv_parser
-```
-
-
-Attention! _uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received_
-Fix: is input is unchanged from previous dont trigger the fetch
+> Two components: Input [input, button, parser.transform = parse + url returns {url} & Output
+> 
 
 ::: {#inputDiv}
 <!-- inputDiv is considered Void-->
 :::
 
 ```{ojs}
-import { bsInputAndFetch2 } from "./bsui_debounce.js"
-import { super_bcv_parser } from "./bsBcv.js";
+import { bsInputBar } from "./bsui_widgets.js"
+import { SuperParserFetcher } from "./superParserFetcher.js";
 
-superBCV = new super_bcv_parser() // instance of singleton parser
-//dummy = superBCV.parse("Gen1.1"); // warm JIT
+superBCV = new SuperParserFetcher(); // instance of singleton parser
 
 viewof refInput2 = {
-  const bsgroup = new bsInputAndFetch2({
+  const bsgroup = new bsInputBar({
     prefixHTML: "<i class='bi bi-book'></i>",
     placeholder:  "Here Bible Reference…",
-    transform: superBCV.osis_array,     // <---- HERE
-    fetcher: superBCV.fetchPassage,
+//    transform: x => x,     // <---- HERE
+    transform:  superBCV.parse_inspect,     // <---- HERE
+//    fetcher: superBCV.fetchPassage,
+    fetcher: superBCV.fetch_ready,
+//    fetcher: superBCV.fetch,
+    parsingInspector: superBCV.parsingInspector,
 //    addLabel: "Add",
     resetLabel: "RAZ"
 //    clipLabel: "CLIP"
@@ -45,10 +37,11 @@ viewof refInput2 = {
 }
 
 //refInput2.current   // "John.3.16"
-html`<pre>${JSON.stringify(refInput2.current)}</pre>`   // "John.3.16"
+//html`<pre>${JSON.stringify(refInput2.current,null,2)}</pre>`   // "John.3.16"
+html`<pre>${JSON.stringify(refInput2.payload,null,2)}</pre>`   // "John.3.16"
 
 //refInput.accum     // ["John.3.16", ...]
-refInput2.content   // sanitized passage_html from your Worker
+//refInput2.content   // sanitized passage_html from your Worker
 
 
 // Don't use listeners; just define the promise.
