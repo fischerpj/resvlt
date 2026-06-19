@@ -67,6 +67,15 @@ export class bsInput {
  * ========================================================================== */
 import { bcv_parser } from "./bcv_parser.js";
 
+
+  constructor({
+    grammar_options = default_grammar_options,
+    regexps = default_regexps,
+    translations = default_translations
+    } = {},
+    baseUrl = "https://hmi.pjafischer.workers.dev/bgw/cache/"
+    ) {
+      
 export class RefEngine {
   constructor({ baseUrl }) {
     this.parser = new bcv_parser();

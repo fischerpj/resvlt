@@ -1,0 +1,38 @@
+---
+title: refengine Test
+subtitle: "Failed to fetch dynamically imported module"
+execute:
+  echo: false
+---
+
+> bcv_parser as argument to RefEngine2
+
+::: {#inputDiv}
+<!-- inputDiv is considered Void-->
+:::
+
+```{ojs}
+//------------------------------------------------------------------------------
+// IMPORT #1: bcv_parser
+import { bcv_parser } from "./bcv_parser.js"; // this is native bcv_parser
+
+// IMPORT#2: default language tables directly here
+import {
+  grammar_options,
+  regexps,
+  translations
+} from "./lang/en.js"
+
+// bcv_parser INSTANCE to with language to be used as such or passed further 
+bcv = new bcv_parser({grammar_options, regexps, translations})
+bcv.parse("John 1").osis()
+
+//------------------------------------------------------------------------------
+// or passed further to SUPER RefEngine2
+import { RefEngine2 } from "./refengine.js";
+
+engine = new RefEngine2(bcv);
+engine.parse("Gen1.3");
+
+```
+

@@ -900,6 +900,7 @@ var bcv_grammar_options_default = {
 var regexps = bcv_regexps;
 var translations = bcv_translations;
 var grammar_options = bcv_grammar_options_default;
+
 export {
   grammar_options,
   regexps,

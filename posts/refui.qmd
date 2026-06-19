@@ -10,22 +10,37 @@ execute:
 :::
 
 ```{ojs}
-  import { bsInput, RefEngine } from "./refui.js";
-  
-  engine = new RefEngine({
-    baseUrl: "https://hmi.pjafischer.workers.dev/bgw/cache/"
-  });
-  
+//------------------------------------------------------------------------------
+// IMPORT #1: bcv_parser
+import { bcv_parser } from "./bcv_parser.js"; // this is native bcv_parser
+
+// IMPORT#2: default language tables directly here
+import { grammar_options, regexps, translations } from "./lang/en.js"
+
+// bcv_parser INSTANCE to with language to be used as such or passed further 
+bcv = new bcv_parser({grammar_options, regexps, translations})
+//bcv.parse("John 1").osis()
+
+//------------------------------------------------------------------------------
+// or passed further to SUPER RefEngine2
+import { RefEngine, monobloc } from "./refengine.js";
+
+engine = new RefEngine(bcv);
+//engine.parse(monobloc);
+
+import { bsInput } from "./refui_sole.js";
+
   viewof ref = new bsInput({
     prefixHTML: "<i class='bi bi-book'></i>",
     placeholder: "Enter reference",
     addLabel: "Add",
     resetLabel: "RAZ",
+//    transform: (txt, prev) => txt
     transform: (txt, prev) => engine.transform(txt, prev)
   }).node();
 
-  // ref; // {osis, previousOsis, url_fetchable, response{..., duration,content}}
-  ref.response ? ref.response.content : "waiting for input";           // current OSIS
+   ref; // {osis, previousOsis, url_fetchable, response{..., duration,content}}
+   ref.response ? ref.response.content : "waiting for input";           // current OSIS
 //  ref.value.osis           // current OSIS
 //  ref.value.previousOsis   // previous OSIS
 //  ref.value.url_fetchable  // non-null only when OSIS changed

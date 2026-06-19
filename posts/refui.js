@@ -7,19 +7,13 @@
 //==============================================================================
 //==============================================================================
 // IMPORTS
-import { bcv_parser } from "./bcv_parser.js"; // this is native bcv_parser
 
-// Import default language tables objet directly here
-import {   
-  grammar_options as default_grammar_options,
-  regexps as default_regexps,
-  translations as default_translations }
-  from "./lang/fr.js";
-  
-  /* =============================================================================
+//import { bcv_parser } from "./bcv_parser.js"; // this is native bcv_parser
+
+/* =============================================================================
     * 1. UI COMPONENT — strict OJS contract
-  * ========================================================================== */
-    export class bsInput {
+* ========================================================================== */
+export class bsInput {
     constructor(options = {}) {
       this.options = {
         placeholder: "toto go",
@@ -152,7 +146,7 @@ import {
     * 2. LOGIC LAYER — parser + OSIS diff + URL builder + conditional fetch
   * ========================================================================== */
   
-  export class RefEngine {
+export class RefEngine {
     #url_fetchable = null; // acts as interface value between parse and fetch
 
     constructor({
@@ -394,15 +388,7 @@ export class bsInputBar {
 // superParserFetcher
 //==============================================================================
 //==============================================================================
-// IMPORTS
-//import { bcv_parser } from "./bcv_parser.js"; // this is native bcv_parser
 
-// Import default language tables directly here
-//import {   
-//  grammar_options as default_grammar_options,
-//  regexps as default_regexps,
-//  translations as default_translations }
-//  from "./lang/fr.js";
   
 //==============================================================================
 export class SuperParserFetcher {
@@ -679,25 +665,3 @@ async robustFetcher(url, {
 } // end of class
 // END of SuperParser
   
-  /* =============================================================================
-    * 3. OJS / QUARTO USAGE (COMMENTED)
-  * ========================================================================== */
-    /*
-    
-    import { bsInput, RefEngine } from "./bible-ref-ojs-diff.js";
-  
-  const engine = new RefEngine({
-    baseUrl: "https://api.example.com/passage"
-  });
-  
-  viewof ref = new bsInput({
-    placeholder: "Enter reference",
-    transform: (txt, prev) => engine.transform(txt, prev)
-  }).node();
-  
-  ref.value.osis           // current OSIS
-  ref.value.previousOsis   // previous OSIS
-  ref.value.url_fetchable  // non-null only when OSIS changed
-  ref.value.response           // fetched JSON (only when OSIS changed)
-  
-  */
