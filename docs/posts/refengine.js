@@ -2,9 +2,11 @@
   * 2. LOGIC LAYER — parser + OSIS diff + URL builder + conditional fetch
 * ========================================================================== */
 
-// RefEngine2 takes bcv_parser as outside argument
+// RefEngine takes bcv_parser as outside argument
 export class RefEngine {
-    #url_fetchable = null; // acts as interface value between parse and fetch
+      // PRIVATE fields
+    #url_fetchable = null;  // acts as interface value between parse and fetch
+    #osis_array = [];       // stores osis & translation in array
 
     constructor(
       parser, 
@@ -51,6 +53,7 @@ export class RefEngine {
       if (!osis) {
         return {
           osis: null,
+          osis_array: null,
           previousOsis,
           url_fetchable: null,
           response: null
@@ -63,9 +66,11 @@ export class RefEngine {
       : null;
       
       // Only fetch when OSIS changed
+      
       let response = null;
       if (url_fetchable) {
         console.log(url_fetchable);
+        this.#osis_array = osis.split(","); // array split equivalent of valid osis string
         const res = await fetch(url_fetchable);
         response = await res.json();
         console.log(response);
@@ -73,6 +78,7 @@ export class RefEngine {
       
       return {
         osis,
+        osis_array: this.#osis_array,
         previousOsis,
         url_fetchable,
         response
