@@ -7,6 +7,8 @@ export class RefEngine {
       // PRIVATE fields
     #url_fetchable = null;  // acts as interface value between parse and fetch
     #osis_array = [];       // stores osis & translation in array
+    #hsub_array = [];       // stores hsub in array
+    #defaultTranslation = "SG21";
 
     constructor(
       parser,
@@ -57,6 +59,20 @@ export class RefEngine {
       return `${this.baseUrl}?param=${encodeURIComponent(osis)}`;
     }
     
+    concatAll() {
+    return this.#osis_array.map(([osisString, translation]) => {
+      // Use default if translation is empty
+      const tr = translation === "" ? this.#defaultTranslation : translation;
+
+      const refs = osisString
+        .split(",")
+        .map(s => s.trim())
+        .filter(Boolean);
+
+      return refs.map(ref => `${ref}!${tr}`);
+    });
+  }
+    
     async transform(ref, previousOsis) {
       const osis = this.parse_osis(ref);   
     // Optional: auto-bind if you want to pass methods directly
@@ -69,6 +85,7 @@ export class RefEngine {
         return {
           osis: null,
           osis_array: null,
+          hsub_array: null,
           previousOsis,
           url_fetchable: null,
           response: null
@@ -87,6 +104,7 @@ export class RefEngine {
         console.log(url_fetchable);
 //        this.#osis_array = osis.split(","); // array split equivalent of valid osis string
         this.#osis_array = this.osis_and_translations();
+        this.#hsub_array = this.concatAll();
         
         const res = await fetch(url_fetchable);
         response = await res.json();
@@ -96,6 +114,7 @@ export class RefEngine {
       return {
         osis,
         osis_array: this.#osis_array,
+        hsub_array:this.#hsub_array,
         previousOsis,
         url_fetchable,
         response
