@@ -19,7 +19,7 @@ import { grammar_options, regexps, translations } from "./lang/en.js"
 
 // bcv_parser INSTANCE to with language to be used as such or passed further 
 bcv = new bcv_parser({grammar_options, regexps, translations})
-//bcv.parse("John 1.1").osis()
+bcv.parse("John 1.1 KJV").osis_and_translations()
 
 //------------------------------------------------------------------------------
 // or passed further to SUPER RefEngine2
