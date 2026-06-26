@@ -3,6 +3,7 @@
 * ========================================================================== */
 // RefEngine respects bcv_parser interfaces: parse, osis, osis_and_translations
 // RefEngine takes bcv_parser as outside argument
+// TODO : try fetch_mono fetch_abort fetch_parallel define interface methods and properties
 export class RefEngine {
       // PRIVATE fields
     #url_fetchable = null;  // acts as interface value between parse and fetch
@@ -10,7 +11,9 @@ export class RefEngine {
     #hsub_array = [];       // stores hsub in array
     #hsub = [];             // stores hsub in array
     #defaultTranslation = "SG21";
-
+    #duration = 0;
+    #response = null;
+    
     constructor(
       parser,
       baseUrl = "https://hmi.pjafischer.workers.dev/bgw/cache/"
@@ -86,9 +89,56 @@ export class RefEngine {
   hsub(){
     return this.#hsub_array.at(-1).join(",");
   }
-    
+  
+  // USE this for parallel and adjust interface
+  async fetchAll() {
+    const tasks = this.urls.map(url =>
+      fetch(url)
+        .then(async res => {
+          if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+          return res.json();
+        })
+        .catch(err => ({ url, error: err.message }))
+    );
+
+    return Promise.all(tasks);
+  }
+  
+    // -------------------------
+  // SIMPLE FETCH (no abort) ADAPT IT
+  // -------------------------
+  async fetch_mono() {
+    const t0 = performance.now();
+
+    try {
+      const res = await fetch(this.url);
+      const t1 = performance.now();
+      this.#duration = Math.round(t1 - t0);
+
+      if (!res.ok) throw new Error(`HTTP ${res.status} for ${this.url}`);
+
+      const json = await res.json();
+      json.duration_client = this.#duration;
+      this.#response = json;
+    } catch (err) {
+      this.#response = {
+        url: this.url,
+        error: err.message,
+        duration_client: this.#duration
+      };
+    }
+
+    return this; // chainable
+  }
+  
     async transform(ref, previousOsis) {
-      const osis = this.parse_osis(ref);   
+//      const osis = this.parse_osis(ref);   
+//      const osis =  this.parse(ref).osis();   
+      this.parse(ref); // start always with .parse
+      this.#osis_array = this._baseParser.osis_and_translations();
+      this.#hsub_array = this.concatAll();
+      this.#hsub = this.concat();
+      const osis =  this.#hsub.at(-1); 
     // Optional: auto-bind if you want to pass methods directly
 //    this.parse_osis_array = this.parse_osis_array.bind(this);
 //    this.parse_inspect = this.parse_inspect.bind(this);    // parse and return inspector object
@@ -118,12 +168,19 @@ export class RefEngine {
       if (url_fetchable) {
         console.log(url_fetchable);
 //        this.#osis_array = osis.split(","); // array split equivalent of valid osis string
-        this.#osis_array = this._baseParser.osis_and_translations();
-        this.#hsub_array = this.concatAll();
-        this.#hsub = this.concat();
+////        this.#osis_array = this._baseParser.osis_and_translations();
+////        this.#hsub_array = this.concatAll();
+////        this.#hsub = this.concat();
         
+        // FETCH sequence
+        const t0 = performance.now();
         const res = await fetch(url_fetchable);
+        const t1 = performance.now();
+        this.#duration = Math.round(t1 - t0);
+      
         response = await res.json();
+        response.duration_client = this.#duration;
+
         console.log(response);
       }
       
