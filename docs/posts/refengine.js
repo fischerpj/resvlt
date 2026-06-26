@@ -74,6 +74,15 @@ export class RefEngine {
     });
   }
   
+    concat() {
+    return this.#osis_array.map(([osisString, translation]) => {
+      // Use default if translation is empty
+      const tr = translation === "" ? this.#defaultTranslation : translation;
+
+      return  `${osisString}!${tr}`;
+    });
+  }
+  
   hsub(){
     return this.#hsub_array.at(-1).join(",");
   }
@@ -111,7 +120,7 @@ export class RefEngine {
 //        this.#osis_array = osis.split(","); // array split equivalent of valid osis string
         this.#osis_array = this._baseParser.osis_and_translations();
         this.#hsub_array = this.concatAll();
-        this.#hsub = this.hsub();
+        this.#hsub = this.concat();
         
         const res = await fetch(url_fetchable);
         response = await res.json();
