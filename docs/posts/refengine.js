@@ -63,6 +63,11 @@ export class RefEngine {
       return `${this.baseUrl}?param=${encodeURIComponent(osis)}`;
     }
     
+    buildUrls() {
+      const urls = this.#hsub.map((hsub) => this.buildUrl(hsub));
+      return urls
+    }
+    
     concatAll() {
     return this.#osis_array.map(([osisString, translation]) => {
       // Use default if translation is empty
@@ -91,8 +96,8 @@ export class RefEngine {
   }
   
   // USE this for parallel and adjust interface
-  async fetchAll() {
-    const tasks = this.urls.map(url =>
+  async fetchAll(myurls) {
+    const tasks = myurls.map(url =>
       fetch(url)
         .then(async res => {
           if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
@@ -159,7 +164,8 @@ export class RefEngine {
       
       // Only build URL when OSIS changed
       const url_fetchable = (osis !== previousOsis)
-      ? this.buildUrl(osis)
+//      ? this.buildUrl(osis)
+      ? this.buildUrls()
       : null;
       
       // Only fetch when OSIS changed
@@ -174,11 +180,12 @@ export class RefEngine {
         
         // FETCH sequence
         const t0 = performance.now();
-        const res = await fetch(url_fetchable);
+// mono fetch        const res = await fetch(url_fetchable.at(-1));
+        response = await this.fetchAll(url_fetchable);
         const t1 = performance.now();
         this.#duration = Math.round(t1 - t0);
       
-        response = await res.json();
+//        response = await res.json();
         response.duration_client = this.#duration;
 
         console.log(response);
