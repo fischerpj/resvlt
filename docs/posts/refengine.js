@@ -184,8 +184,11 @@ export class RefEngine {
         response = await this.fetchAll(url_fetchable);
         const t1 = performance.now();
         this.#duration = Math.round(t1 - t0);
-      
-//        response = await res.json();
+      // postprocessing repsonse.content
+      response = response.map((item) => ({...item,
+        content_array: item.content.split(/\n{4}/).map(s=>s.trim())
+      }));
+      //        response = await res.json();
         response.duration_client = this.#duration;
 
         console.log(response);
