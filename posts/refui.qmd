@@ -38,8 +38,15 @@ import { bsInput } from "./refui_sole.js";
     transform: (txt, prev) => engine.transform(txt, prev)
   }).node();
 
-   ref; // {osis, previousOsis, url_fetchable, response{..., duration,content}}//
-   ref.response ?  ref.response.map((request)=> request.content_array) : "waiting for input";           // current OSIS
+   ref; // {osis, previousOsis, url_fetchable, response{..., duration,content}}////
+//   ref.response ?  ref.response.map((request) => request.content_array) : "waiting for input";           // current OSIS////
+   //html`<ul>${ref.response.at(-1).content_array.map(el=> html`<li>${el}</li>`)}</ul>`
+   ref.response ?  
+      html`<ul>
+      ${ref.response.flatMap(obj => obj.content_array.map(el=> html`<li>${el}</li>`))
+      }</ul>`
+      : 
+      "waiting for input"; 
 //  ref.value.osis           // current OSIS
 //  ref.value.previousOsis   // previous OSIS
 //  ref.value.url_fetchable  // non-null only when OSIS changed
