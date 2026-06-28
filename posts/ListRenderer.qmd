@@ -1,0 +1,28 @@
+---
+title: ListRenderer Demo
+filters:
+  - jimjam-slam/quarto-svelte
+quarto-svelte:
+  use:
+    - ../components/ListRenderer.svelte
+---
+
+> How to use a Svelte component called `ListRenderer.svelte`.
+
+```{ojs}
+// ELEMENT
+myList = html`<my-list></my-list>`
+```
+
+```{ojs}
+// here DATASETS
+textArray = ["aa","tutu","toto"];  
+```
+
+```{ojs}
+//| output: true
+myList.data = textArray;
+```
+
+For more help writing Svelte components, check out the [Svelte tutorial](https://svelte.dev/tutorial/basics) or take look at some of the examples in the [quarto-svelte documentation](https://quarto-svelte.jamesgoldie.dev).
+

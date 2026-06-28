@@ -1,0 +1,51 @@
+---
+title: Ulist
+filters:
+  - jimjam-slam/quarto-svelte
+quarto-svelte:
+  use:
+    - ../components/Ulist.svelte
+format: html
+---
+
+
+
+<style>
+/* Adjust the height of the title block banner */
+quarto-title-banner {
+height: 80px; /* Increase or decrease as needed */
+}
+
+/* Adjust the font size of the title */
+#title-block-header h3 {
+font-size: 1.5rem; /* Adjust font size */
+}
+</style>
+
+> strict idempotent OSIS conversion - _Intra component communication via windows.store_. TODO:  H-store vs O-store
+
+```{ojs}
+//| echo: false
+//myUlist = html`<my-ulist></my-ulist>`
+
+
+// 1. Initialize the component instance
+// This is exactly how the 'Circles' demo initializes
+viewof myList = {
+  return document.createElement("my-ulist");
+à}
+
+// 2. Reactive Data Source
+myArray = ["Item 1", "Item 2", "Item 3"]
+
+// 3. Reactive Bind
+// Whenever myArray changes, this block re-runs and pushes the new array
+// into the 'items' property of your custom element
+{
+  myUlist.items = myArray;
+}
+
+
+
+
+```
