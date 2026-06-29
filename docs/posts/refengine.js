@@ -186,7 +186,7 @@ export class RefEngine {
         this.#duration = Math.round(t1 - t0);
       // postprocessing repsonse.content
       response = response.map((item) => ({...item,
-        content_array: item.content.split(/\n{4}/).map(s=>s.trim())
+        content_array: item.content.split(/\n{3,4}/).map(s=>s.trim())
       }));
       //        response = await res.json();
         response.duration_client = this.#duration;
