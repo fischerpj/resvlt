@@ -1,6 +1,11 @@
 ---
 title: refui
 subtitle: "Input_Bar.js with a) OJS contract b) Boostrap Style c) embedded bcv_parser"
+filters:
+  - jimjam-slam/quarto-svelte
+quarto-svelte:
+  use:
+    - ../components/ListRenderer.svelte
 execute:
   echo: false
 ---
@@ -47,6 +52,11 @@ import { bsInput } from "./refui_sole.js";
       }</ul>`
       : 
       "waiting for input"; 
+  // REPLACE here with svelte ListRenderer
+  content_array_global = ref.response ?  ref.response.flatMap(obj => obj.content_array.map(el=> el)) : 
+      "waiting for input"; 
+  content_array_global;
+  //
 //  ref.value.osis           // current OSIS
 //  ref.value.previousOsis   // previous OSIS
 //  ref.value.url_fetchable  // non-null only when OSIS changed
@@ -70,3 +80,21 @@ restyle = {
 
 ```
 
+
+```{ojs}
+// ELEMENT
+myList = html`<my-list></my-list>`
+```
+
+```{ojs}
+// here DATASETS
+//textArray = ["aa","tutu","toto"];  
+textArray = ["aa","tutu","toto"];  
+
+
+```
+
+```{ojs}
+//| output: true
+myList.data = textArray;
+```
