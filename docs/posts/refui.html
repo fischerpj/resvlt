@@ -205,7 +205,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="dt">transform</span><span class="op">:</span> (txt<span class="op">,</span> prev) <span class="kw">=&gt;</span> engine<span class="op">.</span><span class="fu">transform</span>(txt<span class="op">,</span> prev)</span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>  })<span class="op">.</span><span class="fu">node</span>()<span class="op">;</span></span>
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>   ref<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>   <span class="co">// {osis, previousOsis, url_fetchable, response{..., duration,content}}////</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co">//   ref.response ?  ref.response.map((request) =&gt; request.content_array) : "waiting for input";           // current OSIS////</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>   <span class="co">//html`&lt;ul&gt;${ref.response.at(-1).content_array.map(el=&gt; html`&lt;li&gt;${el}&lt;/li&gt;`)}&lt;/ul&gt;`</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="co">////   ref.response ?  </span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="co">//      html`&lt;ul&gt;</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="co">//      ${ref.response.flatMap(obj =&gt; obj.content_array.map(el=&gt; html`&lt;li&gt;${el}&lt;/li&gt;`))</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="co">//      }&lt;/ul&gt;`</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="co">//      : </span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="co">//      "waiting for input"; </span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  <span class="co">// REPLACE here with svelte ListRenderer</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>  <span class="co">//</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="co">//  ref.value.osis           // current OSIS</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="co">//  ref.value.previousOsis   // previous OSIS</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="co">//  ref.value.url_fetchable  // non-null only when OSIS changed</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="co">//  ref.value.data           // fetched JSON (only when OSIS changed)</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="co">// works OK at least on first one</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>restyle <span class="op">=</span> {</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Wait until OJS inserts it into the DOM</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> container <span class="op">=</span> viewof ref<span class="op">;</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="co">//  const group = container.querySelector("div.input-group");</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> allButtons <span class="op">=</span> container<span class="op">.</span><span class="fu">querySelectorAll</span>(<span class="st">"button"</span>)<span class="op">;</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">queueMicrotask</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>   allButtons<span class="op">.</span><span class="fu">forEach</span>(btn <span class="kw">=&gt;</span> {</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>      btn<span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">remove</span>(<span class="st">"btn-quarto"</span>)<span class="op">;</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">"Hey"</span>)</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-1-1" data-nodetype="declaration">
@@ -257,66 +291,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-1-8" data-nodetype="expression">
-
-</div>
-</div>
-</div>
-<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="49" data-source-offset="-1314"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 48;"><span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>ref<span class="op">.</span><span class="at">response</span> <span class="op">?</span>  </span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>      <span class="fu">html</span><span class="vs">`&lt;ul&gt;</span></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="vs">      </span><span class="sc">${</span>ref<span class="op">.</span><span class="at">response</span><span class="op">.</span><span class="fu">flatMap</span>(obj <span class="kw">=&gt;</span> obj<span class="op">.</span><span class="at">content_array</span><span class="op">.</span><span class="fu">map</span>(el<span class="kw">=&gt;</span> <span class="fu">html</span><span class="vs">`&lt;li&gt;</span><span class="sc">${</span>el<span class="sc">}</span><span class="vs">&lt;/li&gt;`</span>))</span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>      <span class="sc">}</span><span class="vs">&lt;/ul&gt;`</span></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>      <span class="op">:</span> </span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>      <span class="st">"waiting for input"</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-1-9" data-nodetype="expression">
-
-</div>
-</div>
-</div>
-<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="56" data-source-offset="-1529"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 55;"><span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>content_array_global <span class="op">=</span> ref<span class="op">.</span><span class="at">response</span> <span class="op">?</span>  ref<span class="op">.</span><span class="at">response</span><span class="op">.</span><span class="fu">flatMap</span>(obj <span class="kw">=&gt;</span> obj<span class="op">.</span><span class="at">content_array</span><span class="op">.</span><span class="fu">map</span>(el<span class="kw">=&gt;</span> el)) <span class="op">:</span> </span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>      <span class="st">"waiting for input"</span><span class="op">;</span> </span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>  content_array_global<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-1-10" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-1-11" data-nodetype="expression">
-
-</div>
-</div>
-</div>
-<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="66" data-source-offset="-1948"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 65;"><span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>restyle <span class="op">=</span> {</span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Wait until OJS inserts it into the DOM</span></span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> container <span class="op">=</span> viewof ref<span class="op">;</span></span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="co">//  const group = container.querySelector("div.input-group");</span></span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> allButtons <span class="op">=</span> container<span class="op">.</span><span class="fu">querySelectorAll</span>(<span class="st">"button"</span>)<span class="op">;</span></span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">queueMicrotask</span>(() <span class="kw">=&gt;</span> {</span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>   allButtons<span class="op">.</span><span class="fu">forEach</span>(btn <span class="kw">=&gt;</span> {</span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>      btn<span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">remove</span>(<span class="st">"btn-quarto"</span>)<span class="op">;</span></span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">"Hey"</span>)</span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-1-12" data-nodetype="declaration">
+<div id="ojs-cell-1-8" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb5" data-startfrom="84" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 83;"><span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a><span class="co">// ELEMENT</span></span>
-<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a>myList <span class="op">=</span> <span class="fu">html</span><span class="vs">`&lt;my-list&gt;&lt;/my-list&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="85" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 84;"><span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a><span class="co">// ELEMENT</span></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>myList <span class="op">=</span> <span class="fu">html</span><span class="vs">`&lt;my-list&gt;&lt;/my-list&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-2" data-nodetype="declaration">
 
@@ -324,20 +307,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb6" data-startfrom="89" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 88;"><span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a><span class="co">// here DATASETS</span></span>
-<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a><span class="co">//textArray = ["aa","tutu","toto"];  </span></span>
-<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>textArray <span class="op">=</span> [<span class="st">"aa"</span><span class="op">,</span><span class="st">"tutu"</span><span class="op">,</span><span class="st">"toto"</span>]<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="90" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 89;"><span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a><span class="co">// here DATASETS</span></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>content_array_global <span class="op">=</span> ref<span class="op">.</span><span class="at">response</span> <span class="op">?</span>  ref<span class="op">.</span><span class="at">response</span><span class="op">.</span><span class="fu">flatMap</span>(obj <span class="kw">=&gt;</span> obj<span class="op">.</span><span class="at">content_array</span><span class="op">.</span><span class="fu">map</span>(el<span class="kw">=&gt;</span> el)) <span class="op">:</span> </span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>     [<span class="st">"waiting for input global"</span>]<span class="op">;</span> </span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a><span class="co">//content_array_global;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-3" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code hidden" id="cb7" data-startfrom="98" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 97;"><span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a>myList<span class="op">.</span><span class="at">data</span> <span class="op">=</span> textArray<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div id="ojs-cell-4" data-nodetype="expression">
+<div class="cell hidden">
+<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="100" data-source-offset="-2"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 99;"><span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;hr&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-4-1" data-nodetype="expression">
 
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code hidden" id="cb5" data-startfrom="101" data-source-offset="-15"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 100;"><span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a>myList<span class="op">.</span><span class="at">data</span> <span class="op">=</span> content_array_global<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display hidden">
+<div>
+<div id="ojs-cell-4-2" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb6" data-startfrom="105" data-source-offset="-2"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 104;"><span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;hr&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-5-1" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code hidden" id="cb7" data-startfrom="106" data-source-offset="-15"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 105;"><span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;div id="debug"&gt;&lt;h3&gt;debug info&lt;/h3&gt;&lt;/div&gt;`</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-5-2" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code hidden" id="cb8" data-startfrom="107" data-source-offset="-69"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 106;"><span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a>ref<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-5-3" data-nodetype="expression">
+
+</div>
 </div>
 </div>
 </div>
@@ -346,7 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Ii8vLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4vLyBJTVBPUlQgIzE6IGJjdl9wYXJzZXJcbmltcG9ydCB7IGJjdl9wYXJzZXIgfSBmcm9tIFwiLi9iY3ZfcGFyc2VyLmpzXCI7IC8vIHRoaXMgaXMgbmF0aXZlIGJjdl9wYXJzZXJcblxuLy8gSU1QT1JUIzI6IGRlZmF1bHQgbGFuZ3VhZ2UgdGFibGVzIGRpcmVjdGx5IGhlcmVcbmltcG9ydCB7IGdyYW1tYXJfb3B0aW9ucywgcmVnZXhwcywgdHJhbnNsYXRpb25zIH0gZnJvbSBcIi4vbGFuZy9lbi5qc1wiXG5cbi8vIGJjdl9wYXJzZXIgSU5TVEFOQ0UgdG8gd2l0aCBsYW5ndWFnZSB0byBiZSB1c2VkIGFzIHN1Y2ggb3IgcGFzc2VkIGZ1cnRoZXIgXG5iY3YgPSBuZXcgYmN2X3BhcnNlcih7Z3JhbW1hcl9vcHRpb25zLCByZWdleHBzLCB0cmFuc2xhdGlvbnN9KVxuLy9iY3YucGFyc2UoXCJKb2huIDEuMSBLSlZcIikub3Npc19hbmRfdHJhbnNsYXRpb25zKClcblxuLy8tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS1cbi8vIG9yIHBhc3NlZCBmdXJ0aGVyIHRvIFNVUEVSIFJlZkVuZ2luZTJcbmltcG9ydCB7IFJlZkVuZ2luZSwgbW9ub2Jsb2MgfSBmcm9tIFwiLi9yZWZlbmdpbmUuanNcIjtcblxuZW5naW5lID0gbmV3IFJlZkVuZ2luZShiY3YpO1xuXG5pbXBvcnQgeyBic0lucHV0IH0gZnJvbSBcIi4vcmVmdWlfc29sZS5qc1wiO1xuXG4gIHZpZXdvZiByZWYgPSBuZXcgYnNJbnB1dCh7XG4gICAgcHJlZml4SFRNTDogXCI8aSBjbGFzcz0nYmkgYmktYm9vayc+PC9pPlwiLFxuICAgIHBsYWNlaG9sZGVyOiBcIkVudGVyIHJlZmVyZW5jZVwiLFxuICAgIGFkZExhYmVsOiBcIkFkZFwiLFxuICAgIHJlc2V0TGFiZWw6IFwiUkFaXCIsXG4vLyAgICB0cmFuc2Zvcm06ICh0eHQsIHByZXYpID0+IHR4dFxuICAgIHRyYW5zZm9ybTogKHR4dCwgcHJldikgPT4gZW5naW5lLnRyYW5zZm9ybSh0eHQsIHByZXYpXG4gIH0pLm5vZGUoKTtcblxuICAgcmVmOyAvLyB7b3NpcywgcHJldmlvdXNPc2lzLCB1cmxfZmV0Y2hhYmxlLCByZXNwb25zZXsuLi4sIGR1cmF0aW9uLGNvbnRlbnR9fS8vLy9cbi8vICAgcmVmLnJlc3BvbnNlID8gIHJlZi5yZXNwb25zZS5tYXAoKHJlcXVlc3QpID0+IHJlcXVlc3QuY29udGVudF9hcnJheSkgOiBcIndhaXRpbmcgZm9yIGlucHV0XCI7ICAgICAgICAgICAvLyBjdXJyZW50IE9TSVMvLy8vXG4gICAvL2h0bWxgPHVsPiR7cmVmLnJlc3BvbnNlLmF0KC0xKS5jb250ZW50X2FycmF5Lm1hcChlbD0+IGh0bWxgPGxpPiR7ZWx9PC9saT5gKX08L3VsPmBcbiAgIHJlZi5yZXNwb25zZSA/ICBcbiAgICAgIGh0bWxgPHVsPlxuICAgICAgJHtyZWYucmVzcG9uc2UuZmxhdE1hcChvYmogPT4gb2JqLmNvbnRlbnRfYXJyYXkubWFwKGVsPT4gaHRtbGA8bGk+JHtlbH08L2xpPmApKVxuICAgICAgfTwvdWw+YFxuICAgICAgOiBcbiAgICAgIFwid2FpdGluZyBmb3IgaW5wdXRcIjsgXG4gIC8vIFJFUExBQ0UgaGVyZSB3aXRoIHN2ZWx0ZSBMaXN0UmVuZGVyZXJcbiAgY29udGVudF9hcnJheV9nbG9iYWwgPSByZWYucmVzcG9uc2UgPyAgcmVmLnJlc3BvbnNlLmZsYXRNYXAob2JqID0+IG9iai5jb250ZW50X2FycmF5Lm1hcChlbD0+IGVsKSkgOiBcbiAgICAgIFwid2FpdGluZyBmb3IgaW5wdXRcIjsgXG4gIGNvbnRlbnRfYXJyYXlfZ2xvYmFsO1xuICAvL1xuLy8gIHJlZi52YWx1ZS5vc2lzICAgICAgICAgICAvLyBjdXJyZW50IE9TSVNcbi8vICByZWYudmFsdWUucHJldmlvdXNPc2lzICAgLy8gcHJldmlvdXMgT1NJU1xuLy8gIHJlZi52YWx1ZS51cmxfZmV0Y2hhYmxlICAvLyBub24tbnVsbCBvbmx5IHdoZW4gT1NJUyBjaGFuZ2VkXG4vLyAgcmVmLnZhbHVlLmRhdGEgICAgICAgICAgIC8vIGZldGNoZWQgSlNPTiAob25seSB3aGVuIE9TSVMgY2hhbmdlZClcblxuLy8gd29ya3MgT0sgYXQgbGVhc3Qgb24gZmlyc3Qgb25lXG5yZXN0eWxlID0ge1xuICAvLyBXYWl0IHVudGlsIE9KUyBpbnNlcnRzIGl0IGludG8gdGhlIERPTVxuICBjb25zdCBjb250YWluZXIgPSB2aWV3b2YgcmVmO1xuLy8gIGNvbnN0IGdyb3VwID0gY29udGFpbmVyLnF1ZXJ5U2VsZWN0b3IoXCJkaXYuaW5wdXQtZ3JvdXBcIik7XG4gIFxuICBjb25zdCBhbGxCdXR0b25zID0gY29udGFpbmVyLnF1ZXJ5U2VsZWN0b3JBbGwoXCJidXR0b25cIik7XG5cbiAgcXVldWVNaWNyb3Rhc2soKCkgPT4ge1xuICAgYWxsQnV0dG9ucy5mb3JFYWNoKGJ0biA9PiB7XG4gICAgICBidG4uY2xhc3NMaXN0LnJlbW92ZShcImJ0bi1xdWFydG9cIik7XG4gICAgICBjb25zb2xlLmxvZyhcIkhleVwiKVxuICAgIH0pO1xuICB9KTtcbn0gLy8gZW5kIG9mIHJlc3R5bGUgIFxuXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTIiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiIvLyBFTEVNRU5UXG5teUxpc3QgPSBodG1sYDxteS1saXN0PjwvbXktbGlzdD5gXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTMiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiIvLyBoZXJlIERBVEFTRVRTXG4vL3RleHRBcnJheSA9IFtcImFhXCIsXCJ0dXR1XCIsXCJ0b3RvXCJdOyAgXG50ZXh0QXJyYXkgPSBbXCJhYVwiLFwidHV0dVwiLFwidG90b1wiXTsgIFxuXG5cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Im15TGlzdC5kYXRhID0gdGV4dEFycmF5O1xuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdyZWYnKSJ9XX0=
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Ii8vLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4vLyBJTVBPUlQgIzE6IGJjdl9wYXJzZXJcbmltcG9ydCB7IGJjdl9wYXJzZXIgfSBmcm9tIFwiLi9iY3ZfcGFyc2VyLmpzXCI7IC8vIHRoaXMgaXMgbmF0aXZlIGJjdl9wYXJzZXJcblxuLy8gSU1QT1JUIzI6IGRlZmF1bHQgbGFuZ3VhZ2UgdGFibGVzIGRpcmVjdGx5IGhlcmVcbmltcG9ydCB7IGdyYW1tYXJfb3B0aW9ucywgcmVnZXhwcywgdHJhbnNsYXRpb25zIH0gZnJvbSBcIi4vbGFuZy9lbi5qc1wiXG5cbi8vIGJjdl9wYXJzZXIgSU5TVEFOQ0UgdG8gd2l0aCBsYW5ndWFnZSB0byBiZSB1c2VkIGFzIHN1Y2ggb3IgcGFzc2VkIGZ1cnRoZXIgXG5iY3YgPSBuZXcgYmN2X3BhcnNlcih7Z3JhbW1hcl9vcHRpb25zLCByZWdleHBzLCB0cmFuc2xhdGlvbnN9KVxuLy9iY3YucGFyc2UoXCJKb2huIDEuMSBLSlZcIikub3Npc19hbmRfdHJhbnNsYXRpb25zKClcblxuLy8tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS1cbi8vIG9yIHBhc3NlZCBmdXJ0aGVyIHRvIFNVUEVSIFJlZkVuZ2luZTJcbmltcG9ydCB7IFJlZkVuZ2luZSwgbW9ub2Jsb2MgfSBmcm9tIFwiLi9yZWZlbmdpbmUuanNcIjtcblxuZW5naW5lID0gbmV3IFJlZkVuZ2luZShiY3YpO1xuXG5pbXBvcnQgeyBic0lucHV0IH0gZnJvbSBcIi4vcmVmdWlfc29sZS5qc1wiO1xuXG4gIHZpZXdvZiByZWYgPSBuZXcgYnNJbnB1dCh7XG4gICAgcHJlZml4SFRNTDogXCI8aSBjbGFzcz0nYmkgYmktYm9vayc+PC9pPlwiLFxuICAgIHBsYWNlaG9sZGVyOiBcIkVudGVyIHJlZmVyZW5jZVwiLFxuICAgIGFkZExhYmVsOiBcIkFkZFwiLFxuICAgIHJlc2V0TGFiZWw6IFwiUkFaXCIsXG4vLyAgICB0cmFuc2Zvcm06ICh0eHQsIHByZXYpID0+IHR4dFxuICAgIHRyYW5zZm9ybTogKHR4dCwgcHJldikgPT4gZW5naW5lLnRyYW5zZm9ybSh0eHQsIHByZXYpXG4gIH0pLm5vZGUoKTtcblxuXG4gICAvLyB7b3NpcywgcHJldmlvdXNPc2lzLCB1cmxfZmV0Y2hhYmxlLCByZXNwb25zZXsuLi4sIGR1cmF0aW9uLGNvbnRlbnR9fS8vLy9cbi8vICAgcmVmLnJlc3BvbnNlID8gIHJlZi5yZXNwb25zZS5tYXAoKHJlcXVlc3QpID0+IHJlcXVlc3QuY29udGVudF9hcnJheSkgOiBcIndhaXRpbmcgZm9yIGlucHV0XCI7ICAgICAgICAgICAvLyBjdXJyZW50IE9TSVMvLy8vXG4gICAvL2h0bWxgPHVsPiR7cmVmLnJlc3BvbnNlLmF0KC0xKS5jb250ZW50X2FycmF5Lm1hcChlbD0+IGh0bWxgPGxpPiR7ZWx9PC9saT5gKX08L3VsPmBcblxuLy8vLyAgIHJlZi5yZXNwb25zZSA/ICBcbi8vICAgICAgaHRtbGA8dWw+XG4vLyAgICAgICR7cmVmLnJlc3BvbnNlLmZsYXRNYXAob2JqID0+IG9iai5jb250ZW50X2FycmF5Lm1hcChlbD0+IGh0bWxgPGxpPiR7ZWx9PC9saT5gKSlcbi8vICAgICAgfTwvdWw+YFxuLy8gICAgICA6IFxuLy8gICAgICBcIndhaXRpbmcgZm9yIGlucHV0XCI7IFxuXG4gIC8vIFJFUExBQ0UgaGVyZSB3aXRoIHN2ZWx0ZSBMaXN0UmVuZGVyZXJcblxuICAvL1xuLy8gIHJlZi52YWx1ZS5vc2lzICAgICAgICAgICAvLyBjdXJyZW50IE9TSVNcbi8vICByZWYudmFsdWUucHJldmlvdXNPc2lzICAgLy8gcHJldmlvdXMgT1NJU1xuLy8gIHJlZi52YWx1ZS51cmxfZmV0Y2hhYmxlICAvLyBub24tbnVsbCBvbmx5IHdoZW4gT1NJUyBjaGFuZ2VkXG4vLyAgcmVmLnZhbHVlLmRhdGEgICAgICAgICAgIC8vIGZldGNoZWQgSlNPTiAob25seSB3aGVuIE9TSVMgY2hhbmdlZClcblxuLy8gd29ya3MgT0sgYXQgbGVhc3Qgb24gZmlyc3Qgb25lXG5yZXN0eWxlID0ge1xuICAvLyBXYWl0IHVudGlsIE9KUyBpbnNlcnRzIGl0IGludG8gdGhlIERPTVxuICBjb25zdCBjb250YWluZXIgPSB2aWV3b2YgcmVmO1xuLy8gIGNvbnN0IGdyb3VwID0gY29udGFpbmVyLnF1ZXJ5U2VsZWN0b3IoXCJkaXYuaW5wdXQtZ3JvdXBcIik7XG4gIFxuICBjb25zdCBhbGxCdXR0b25zID0gY29udGFpbmVyLnF1ZXJ5U2VsZWN0b3JBbGwoXCJidXR0b25cIik7XG5cbiAgcXVldWVNaWNyb3Rhc2soKCkgPT4ge1xuICAgYWxsQnV0dG9ucy5mb3JFYWNoKGJ0biA9PiB7XG4gICAgICBidG4uY2xhc3NMaXN0LnJlbW92ZShcImJ0bi1xdWFydG9cIik7XG4gICAgICBjb25zb2xlLmxvZyhcIkhleVwiKVxuICAgIH0pO1xuICB9KTtcbn0gLy8gZW5kIG9mIHJlc3R5bGUgIFxuXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTIiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiIvLyBFTEVNRU5UXG5teUxpc3QgPSBodG1sYDxteS1saXN0PjwvbXktbGlzdD5gXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTMiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiIvLyBoZXJlIERBVEFTRVRTXG5jb250ZW50X2FycmF5X2dsb2JhbCA9IHJlZi5yZXNwb25zZSA/ICByZWYucmVzcG9uc2UuZmxhdE1hcChvYmogPT4gb2JqLmNvbnRlbnRfYXJyYXkubWFwKGVsPT4gZWwpKSA6IFxuICAgICBbXCJ3YWl0aW5nIGZvciBpbnB1dCBnbG9iYWxcIl07IFxuLy9jb250ZW50X2FycmF5X2dsb2JhbDtcblxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC00IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiICBodG1sYDxocj5gXG4gIG15TGlzdC5kYXRhID0gY29udGVudF9hcnJheV9nbG9iYWw7XG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTUiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiIgIGh0bWxgPGhyPmBcbiAgaHRtbGA8ZGl2IGlkPVwiZGVidWdcIj48aDM+ZGVidWcgaW5mbzwvaDM+PC9kaXY+YDsgXG4gICAgcmVmO1xuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdyZWYnKSJ9XX0=
 </script>
 <script type="module">
 if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
