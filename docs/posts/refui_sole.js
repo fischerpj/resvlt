@@ -16,6 +16,7 @@ export class bsInput {
         addLabel: "Add",
         resetLabel: "Reset",
         clipLabel: "Clip",
+        helpLabel: "Help",
         variant: "primary",
         size: undefined,
         transform: x => x,     // must return cleaned OSIS or null
@@ -88,7 +89,17 @@ export class bsInput {
     });
 
     this.root.appendChild(this.btnReset);
-      //------------------------------------------------------------------------
+    //------------------------------------------------------------------------
+    
+    // ---- Help button ----
+      this.btnHelp = document.createElement("button");
+      this.btnHelp.type = "button";
+      this.btnHelp.className = `btn btn-warning`;
+      this.btnHelp.textContent = this.options.helpLabel;
+
+    this.root.appendChild(this.btnHelp);
+
+    // -------------------------------------------------------------------------  
       
     // 2. HANDLER logic
       // Internal state

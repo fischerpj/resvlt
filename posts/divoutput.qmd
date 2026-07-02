@@ -1,0 +1,32 @@
+---
+title: div#output
+format: html
+execute:
+  echo: false
+---
+
+titi 
+
+```{=html}
+<div id="outputDiv" class="special-text" style="padding: 20px; border: 1px solid #ccc;">
+  <p>This is raw HTML that will be rendered directly by the browser.</p>
+</div>
+```
+
+toto 
+
+```{ojs}
+//| echo: false
+
+// 1. Create the input
+viewof myInput = Inputs.text({label: "Enter text:"})
+
+// 2. Define a side-effect to mount it to the existing div
+{
+  const target = document.getElementById("outputDiv");
+  // Clear the placeholder
+  target.innerHTML = "";
+  // Append the viewof DOM element
+  target.appendChild(viewof myInput);
+}
+```

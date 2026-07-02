@@ -11,7 +11,7 @@
     "href": "posts/refui.html",
     "title": "refui",
     "section": "",
-    "text": "import { bcv_parser } from \"./bcv_parser.js\"; // this is native bcv_parser\n\n// IMPORT#2: default language tables directly here\nimport { grammar_options, regexps, translations } from \"./lang/en.js\"\n\n// bcv_parser INSTANCE to with language to be used as such or passed further \nbcv = new bcv_parser({grammar_options, regexps, translations})\n//bcv.parse(\"John 1.1 KJV\").osis_and_translations()\n\n//------------------------------------------------------------------------------\n// or passed further to SUPER RefEngine2\nimport { RefEngine, monobloc } from \"./refengine.js\";\n\nengine = new RefEngine(bcv);\n\nimport { bsInput } from \"./refui_sole.js\";\n\n  viewof ref = new bsInput({\n    prefixHTML: \"&lt;i class='bi bi-book'&gt;&lt;/i&gt;\",\n    placeholder: \"Enter reference\",\n    addLabel: \"Add\",\n    resetLabel: \"RAZ\",\n//    transform: (txt, prev) =&gt; txt\n    transform: (txt, prev) =&gt; engine.transform(txt, prev)\n  }).node();\n\n\n   // {osis, previousOsis, url_fetchable, response{..., duration,content}}////\n//   ref.response ?  ref.response.map((request) =&gt; request.content_array) : \"waiting for input\";           // current OSIS////\n   //html`&lt;ul&gt;${ref.response.at(-1).content_array.map(el=&gt; html`&lt;li&gt;${el}&lt;/li&gt;`)}&lt;/ul&gt;`\n\n////   ref.response ?  \n//      html`&lt;ul&gt;\n//      ${ref.response.flatMap(obj =&gt; obj.content_array.map(el=&gt; html`&lt;li&gt;${el}&lt;/li&gt;`))\n//      }&lt;/ul&gt;`\n//      : \n//      \"waiting for input\"; \n\n  // REPLACE here with svelte ListRenderer\n\n  //\n//  ref.value.osis           // current OSIS\n//  ref.value.previousOsis   // previous OSIS\n//  ref.value.url_fetchable  // non-null only when OSIS changed\n//  ref.value.data           // fetched JSON (only when OSIS changed)\n\n// works OK at least on first one\nrestyle = {\n  // Wait until OJS inserts it into the DOM\n  const container = viewof ref;\n//  const group = container.querySelector(\"div.input-group\");\n  \n  const allButtons = container.querySelectorAll(\"button\");\n\n  queueMicrotask(() =&gt; {\n   allButtons.forEach(btn =&gt; {\n      btn.classList.remove(\"btn-quarto\");\n      console.log(\"Hey\")\n    });\n  });\n}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n// ELEMENT\nmyList = html`&lt;my-list&gt;&lt;/my-list&gt;`\n\n\n\n\n\n\n\n// here DATASETS\ncontent_array_global = ref.response ?  ref.response.flatMap(obj =&gt; obj.content_array.map(el=&gt; el)) : \n     [\"waiting for input global\"]; \n//content_array_global;\n\n\n\n\n\n\n\nhtml`&lt;hr&gt;`\n\n\n\n\n\n\n\nmyList.data = content_array_global;\n\n\n\n\n\n\n\n\n\nhtml`&lt;hr&gt;`\n\n\n\n\n\n\n\nhtml`&lt;div id=\"debug\"&gt;&lt;h3&gt;debug info&lt;/h3&gt;&lt;/div&gt;`;\n\n\n\n\n\n\n\nref;"
+    "text": "import { bcv_parser } from \"./bcv_parser.js\"; // this is native bcv_parser\n\n// IMPORT#2: default language tables directly here\nimport { grammar_options, regexps, translations } from \"./lang/en.js\"\n\n// bcv_parser INSTANCE to with language to be used as such or passed further \nbcv = new bcv_parser({grammar_options, regexps, translations})\n//bcv.parse(\"John 1.1 KJV\").osis_and_translations()\n\n//------------------------------------------------------------------------------\n// or passed further to SUPER RefEngine2\nimport { RefEngine, monobloc } from \"./refengine.js\";\n\nengine = new RefEngine(bcv);\n\nimport { bsInput } from \"./refui_sole.js\";\n\n  viewof ref = new bsInput({\n    prefixHTML: \"&lt;i class='bi bi-book'&gt;&lt;/i&gt;\",\n    placeholder: \"Enter reference\",\n    addLabel: \"Add\",\n    resetLabel: \"RAZ\",\n//    transform: (txt, prev) =&gt; txt\n    transform: (txt, prev) =&gt; engine.transform(txt, prev)\n  }).node();\n\n\n   // {osis, previousOsis, url_fetchable, response{..., duration,content}}////\n//   ref.response ?  ref.response.map((request) =&gt; request.content_array) : \"waiting for input\";           // current OSIS////\n   //html`&lt;ul&gt;${ref.response.at(-1).content_array.map(el=&gt; html`&lt;li&gt;${el}&lt;/li&gt;`)}&lt;/ul&gt;`\n\n////   ref.response ?  \n//      html`&lt;ul&gt;\n//      ${ref.response.flatMap(obj =&gt; obj.content_array.map(el=&gt; html`&lt;li&gt;${el}&lt;/li&gt;`))\n//      }&lt;/ul&gt;`\n//      : \n//      \"waiting for input\"; \n\n  // REPLACE here with svelte ListRenderer\n\n  //\n//  ref.value.osis           // current OSIS\n//  ref.value.previousOsis   // previous OSIS\n//  ref.value.url_fetchable  // non-null only when OSIS changed\n//  ref.value.data           // fetched JSON (only when OSIS changed)\n\n// works OK at least on first one\nrestyle = {\n  // Wait until OJS inserts it into the DOM\n  const container = viewof ref;\n//  const group = container.querySelector(\"div.input-group\");\n  \n  const allButtons = container.querySelectorAll(\"button\");\n\n  queueMicrotask(() =&gt; {\n   allButtons.forEach(btn =&gt; {\n      btn.classList.remove(\"btn-quarto\");\n      console.log(\"Hey\")\n    });\n  });\n}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmyList = html`&lt;my-list&gt;&lt;/my-list&gt;`\n\n// 2. Define a side-effect to mount it to the existing div\nsideffect = {\n  const target = document.getElementById(\"outputDiv\");\n  target.classList.add(\"special-text\")\n  // Clear the placeholder\n  target.innerHTML = \"\";\n  // Append the viewof DOM element\n  target.appendChild(myList);\n  return null\n}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n// here DATASETS\ncontent_array_global = ref.response ?  ref.response.flatMap(obj =&gt; obj.content_array.map(el=&gt; el)) : \n     [\"waiting for input global\"]; \n//content_array_global;\n\n\n\n\n\n\n\nhtml`&lt;hr&gt;`\n\n\n\n\n\n\n\nmyList.data = content_array_global;\n\n\n\n\n\n\n\n\n\nhtml`&lt;hr&gt;`\n\n\n\n\n\n\n\nhtml`&lt;div id=\"debug\"&gt;&lt;h3&gt;debug info&lt;/h3&gt;&lt;/div&gt;`;\n\n\n\n\n\n\n\nref;\n\n\n\n\n\n\n\nhtml`&lt;hr&gt;`\n\n\n\n\n\n\n\nmyPara = html`&lt;p&gt;Toto is testing fontsize&lt;/p&gt;`"
   },
   {
     "objectID": "posts/echoInput.html",
@@ -21,81 +21,11 @@
     "text": "import {EchoInput} from \"./bsui_widgets.js\";\n\n// Instantiate the widget\nviewof echo = new EchoInput({\n  placeholder: \"Type something…\",\n  oninput: v =&gt; console.log(\"Callback:\", v)\n});\n\n// Mount into a DOM container\necho.mount(html`&lt;div&gt;&lt;/div&gt;`);"
   },
   {
-    "objectID": "posts/VerseWorkflow.html",
-    "href": "posts/VerseWorkflow.html",
-    "title": "Verse Workflow",
+    "objectID": "posts/bcv.html",
+    "href": "posts/bcv.html",
+    "title": "BCV",
     "section": "",
-    "text": "For Bible Reference From UserInput To Display\n\n\nUserInput is Free Text Transformed to strict OSIS Then as_is_passthrough to service worker fetching. =&gt; parse.hsub_entities()\n\n\nUserInput accepts free text as does bcv_parser\nParsing delivers Strict Idempotent String like (Gen.1.2 SG21); (Gal.2.8,Phil.4.6 KJV)\nand HSUB_RefArray aka hsub_entities() like [“Gen.1.2!SG21”,“Gal.2.8,Phil.4.6!KJV”] with elements acceptable to hsubre service worker.\nURL service worker\nwhere to put fetch ?\n\n\nmyOsisParser = html`&lt;my-osisparserui&gt;&lt;/my-osisparserui&gt;`"
-  },
-  {
-    "objectID": "posts/OsisParserUI.html",
-    "href": "posts/OsisParserUI.html",
-    "title": "OsisParserUI",
-    "section": "",
-    "text": "strict idempotent OSIS conversion - Intra component communication via windows.store. TODO: H-store vs O-store\n\n\nmyOsisParser = html`&lt;my-osisparserui&gt;&lt;/my-osisparserui&gt;`"
-  },
-  {
-    "objectID": "posts/Circles_example.html",
-    "href": "posts/Circles_example.html",
-    "title": "quarto-svelte example",
-    "section": "",
-    "text": "This document shows you how to use a basic example Svelte component called Circles.svelte.\nCreate one using an HTML template:\n\nmyCircles = html`&lt;my-circles&gt;&lt;/my-circles&gt;`\n\n\n\n\n\n\nNow the fun part - updating our visual when our document changes. It’s as simple as changing the prop using componentName.propName =.\nFor example, here are three datasets and an Observable Inputs dropdown menu that lets you select one of three datasets:\n\n// here are some datasets...\nallDatasets = new Map([\n    [\"Dataset A\", [5, 15, 25, 17, 8]],\n    [\"Dataset B\", [25, 5, 5]],\n    [\"Dataset C\", [12, 5, 8, 21, 5]]\n  ]);\n\n\n\n\n\n\n\nviewof selectedDataset =\n  Inputs.select(allDatasets, { label: \"Selected dataset\" });\n\n\n\n\n\n\nNow we can update the prop data of the visual myCircles using:\n\nmyCircles.data = selectedDataset\n\n\n\n\n\n\nAnd there you go! 🚀\nFor more help writing Svelte components, check out the Svelte tutorial or take look at some of the examples in the quarto-svelte documentation."
-  },
-  {
-    "objectID": "posts/BsParser.html",
-    "href": "posts/BsParser.html",
-    "title": "BsParser",
-    "section": "",
-    "text": "Validate an bsInput with one super_bcv_wrapper\n\nOJS requires the path to start with ./ or ../\n\n\n\n\nimport { bsInputgroupTransform } from \"./bsui.js\"\nimport { super_bcv_parser } from \"./bsBcv.js\";\n\nsuperBCV = new super_bcv_parser() // instance of singleton parser\n\nviewof refInput = new bsInputgroupTransform({\n  prefixHTML: \"&lt;i class='bi bi-book'&gt;&lt;/i&gt;\",\n  placeholder: \"Enter Bible reference…\",\n  transform: superBCV.osis_array,     // &lt;---- HERE\n  fetcher: superBCV.fetchPassage,\n  addLabel: \"Add\",\n  resetLabel: \"RAZ\",\n  clipLabel: \"CLIP\"\n}).node()\n\nrefInput\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrefInput.content\n\n\n\n\n\n\n\n\n\nimport { bsInputgroupFetch } from \"./bsui.js\"\n\n//superBCV2 = new super_bcv_parser() // instance of singleton parser\n\nviewof refInput2 = {\n  const bsgroup = new bsInputgroupFetch({\n    prefixHTML: \"&lt;i class='bi bi-book'&gt;&lt;/i&gt;\",\n    placeholder: \"Enter Bible reference…\",\n    transform: superBCV.osis_array,     // &lt;---- HERE\n    fetcher: superBCV.fetchPassage,\n    addLabel: \"Add\",\n    resetLabel: \"RAZ\",\n    clipLabel: \"CLIP\"\n  }).node();\n\n  return bsgroup;\n}\n\nrestyle = {\n  // Wait until OJS inserts it into the DOM\n  const container = viewof refInput2;\n//  const group = container.querySelector(\"div.input-group\");\n  \n  const allButtons = container.querySelectorAll(\"button\");\n\n  queueMicrotask(() =&gt; {\n   allButtons.forEach(btn =&gt; {\n      btn.classList.remove(\"btn-quarto\");\n      console.log(\"Hey\")\n    });\n  });\n  \n/**  \n  const obs = new MutationObserver(() =&gt; {\n    allButtons.forEach(btn =&gt; {\n        btn.classList.remove(\"btn-quarto\");\n        });\n    });\n    \n  obs.observe(container, { childList: true, subtree: true });\n*/\n}\n\nrefInput2.current\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrefInput2.content"
-  },
-  {
-    "objectID": "posts/Breader.html",
-    "href": "posts/Breader.html",
-    "title": "Breader",
-    "section": "",
-    "text": "bsInput –&gt; validate/fetch –&gt; display\n\n\nsuper_bcv_parser does the validation of an input string and\nbsInputAndDebounce manages the UI, reacts with a transform/validation method, triggers the fetch\n\n\n\n\n\n\ngraph LR\n  bsInputAndDebounce --&gt; super_bcv_parser\n\n\n\n\n\n\nAttention! uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received Fix: is input is unchanged from previous dont trigger the fetch\n\n\n\n\nimport { bsInputAndFetch2 } from \"./bsui_debounce.js\"\nimport { super_bcv_parser } from \"./bsBcv.js\";\n\nsuperBCV = new super_bcv_parser() // instance of singleton parser\n//dummy = superBCV.parse(\"Gen1.1\"); // warm JIT\n\nviewof refInput2 = {\n  const bsgroup = new bsInputAndFetch2({\n    prefixHTML: \"&lt;i class='bi bi-book'&gt;&lt;/i&gt;\",\n    placeholder:  \"Here Bible Reference…\",\n    transform: superBCV.osis_array,     // &lt;---- HERE\n    fetcher: superBCV.fetchPassage,\n//    addLabel: \"Add\",\n    resetLabel: \"RAZ\"\n//    clipLabel: \"CLIP\"\n  }).node();\n\n  return bsgroup;\n}\n\n//refInput2.current   // \"John.3.16\"\nhtml`&lt;pre&gt;${JSON.stringify(refInput2.current)}&lt;/pre&gt;`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrefInput2.content\n\n\n\n\n\n\n\nrestyle = {\n  // Wait until OJS inserts it into the DOM\n  const container = viewof refInput2;\n//  const group = container.querySelector(\"div.input-group\");\n  \n  const allButtons = container.querySelectorAll(\"button\");\n\n  queueMicrotask(() =&gt; {\n   allButtons.forEach(btn =&gt; {\n      btn.classList.remove(\"btn-quarto\");\n      console.log(\"Hey\")\n    });\n  });\n}"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this blog"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Svlt2",
-    "section": "",
-    "text": "BMix\n\n\nBootstrap Mix of JS & Svelte\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBreader\n\n\njust get’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBreader2\n\n\njust get’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBsParser\n\n\nvalid’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBsUi\n\n\nemulat’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nquarto-svelte example\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nListRenderer Demo\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOsisParserUI\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUlist\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVerse Workflow\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBCV\n\n\nread’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nechoInput\n\n\nBootstrap Mix of JS & Svelte\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrefengine Test\n\n\nFailed to fetch dynamically imported module\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrefui\n\n\nInput_Bar.js with a) OJS contract b) Boostrap Style c) embedded bcv_parser\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStrong Study Workflow\n\n\nmethodology\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWidgets\n\n\njust get’em\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "posts/BMix.html",
-    "href": "posts/BMix.html",
-    "title": "BMix",
-    "section": "",
-    "text": "Two components: Input [input, button, parser.transform = parse + url returns {url} & Output\n\n\n\n\n\nimport { bsInputBar } from \"./bsui_widgets.js\"\nimport { SuperParserFetcher } from \"./superParserFetcher.js\";\n\nsuperBCV = new SuperParserFetcher(); // instance of singleton parser\n\nviewof refInput2 = {\n  const bsgroup = new bsInputBar({\n    prefixHTML: \"&lt;i class='bi bi-book'&gt;&lt;/i&gt;\",\n    placeholder:  \"Here Bible Reference…\",\n//    transform: x =&gt; x,     // &lt;---- HERE\n    transform:  superBCV.parse_inspect,     // &lt;---- HERE\n//    fetcher: superBCV.fetchPassage,\n    fetcher: superBCV.fetch_ready,\n//    fetcher: superBCV.fetch,\n    parsingInspector: superBCV.parsingInspector,\n//    addLabel: \"Add\",\n    resetLabel: \"RAZ\"\n//    clipLabel: \"CLIP\"\n  }).node();\n\n  return bsgroup;\n}\n\n//refInput2.current   // \"John.3.16\"\n//html`&lt;pre&gt;${JSON.stringify(refInput2.current,null,2)}&lt;/pre&gt;`   // \"John.3.16\"\nhtml`&lt;pre&gt;${JSON.stringify(refInput2.payload,null,2)}&lt;/pre&gt;`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrestyle = {\n  // Wait until OJS inserts it into the DOM\n  const container = viewof refInput2;\n//  const group = container.querySelector(\"div.input-group\");\n  \n  const allButtons = container.querySelectorAll(\"button\");\n\n  queueMicrotask(() =&gt; {\n   allButtons.forEach(btn =&gt; {\n      btn.classList.remove(\"btn-quarto\");\n      console.log(\"Hey\")\n    });\n  });\n}"
-  },
-  {
-    "objectID": "posts/Breader2.html",
-    "href": "posts/Breader2.html",
-    "title": "Breader2",
-    "section": "",
-    "text": "bsInput –&gt; validate/fetch –&gt; display\n\n\nOK x=&gt; x echo input\nnext x=&gt; osis\nsuper_bcv_parser does the validation of an input string and\nbsInputAndDebounce manages the UI, reacts with a transform/validation method, triggers the fetch\n\n\n\n\n\n\ngraph LR\n  bsInputAndDebounce --&gt; super_bcv_parser\n\n\n\n\n\n\nAttention! uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received Fix: is input is unchanged from previous dont trigger the fetch\n\n\n\n\nimport { bsInputAndFetch2 } from \"./bsui_debounce.js\"\nimport { SuperParser } from \"./bsBcv2.js\";\n\nsuperBCV = new SuperParser(); // instance of singleton parser\n//dummy = superBCV.parse(\"Gen1.1\"); // warm JIT\n\nviewof refInput2 = {\n  const bsgroup = new bsInputAndFetch2({\n    prefixHTML: \"&lt;i class='bi bi-book'&gt;&lt;/i&gt;\",\n    placeholder:  \"Here Bible Reference…\",\n    transform: superBCV.osis_array,     // &lt;---- HERE\n//    transform:  superBCV.parseOsis,     // &lt;---- HERE\n//    fetcher: superBCV.fetchPassage,\n    fetcher: superBCV.fetch_json,\n//    fetcher: superBCV.fetch,\n    parsingInspector: superBCV.parsingInspector,\n//    addLabel: \"Add\",\n    resetLabel: \"RAZ\"\n//    clipLabel: \"CLIP\"\n  }).node();\n\n  return bsgroup;\n}\n\n//refInput2.current   // \"John.3.16\"\nhtml`&lt;pre&gt;${JSON.stringify(refInput2.current)}&lt;/pre&gt;`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrefInput2.content\n\n\n\n\n\n\n\nrestyle = {\n  // Wait until OJS inserts it into the DOM\n  const container = viewof refInput2;\n//  const group = container.querySelector(\"div.input-group\");\n  \n  const allButtons = container.querySelectorAll(\"button\");\n\n  queueMicrotask(() =&gt; {\n   allButtons.forEach(btn =&gt; {\n      btn.classList.remove(\"btn-quarto\");\n      console.log(\"Hey\")\n    });\n  });\n}"
-  },
-  {
-    "objectID": "posts/BsUi.html",
-    "href": "posts/BsUi.html",
-    "title": "BsUi",
-    "section": "",
-    "text": "FIX OK .current, .accu OK restyle with queueMicrotask and MutationObserver OK transform\n\n\n\n\n// bsButton: Bootstrap-styled button, OJS-compatible, written as plain class javascript.\n\nimport {bsButton} from \"./bsui.js\"\n\nviewof run = new bsButton({\n  label: \"RAZ\",\n  variant: \"warning\",\n  value: { action: \"run\" }\n}).node()\n\nrun\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nimport { bsInput } from \"./bsui.js\"\n\nviewof name = new bsInput({\n  label: \"Your name\",\n  placeholder: \"Type here…\",\n  description: \"bsInput: Bootstrap-styled text input, OJS-compatible as plain js class\",\n  value: \"Pier\"\n}).node()\n\nname\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nimport { bsInputgroup } from \"./bsui.js\"\n\nviewof ig = new bsInputgroup({\n  placeholder: \"Type something…\",\n  buttonLabel: \"Accumulate\",\n  variant: \"success\"\n}).node()\n\nig.current\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nig\n\n\n\n\n\n\n\n\n\nimport { bsInputgroup3 } from \"./bsui.js\"\n\nviewof ig3 = new bsInputgroup3({\n  placeholder: \"Hi Type something3…\",\n  prefixHTML: '&lt;i class=\"bi bi-search\"&gt;&lt;/i&gt;',\n  addLabel: \"Add\",\n  resetLabel: \"RAZ\",\n  clipLabel: \"Clip\",\n  variant: \"primary\"\n}).node()\n\nig3.current\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nig3\n\n\n\n\n\n\n\n\nbsInputgroupTransform\n\nimport { bsInputgroupTransform } from \"./bsui.js\"\n\nviewof ig_tfr = new bsInputgroupTransform({\n  placeholder: \"Hi Type something tfrm…\",\n  prefixHTML: '&lt;i class=\"bi bi-search\"&gt;&lt;/i&gt;',\n  addLabel: \"Add\",\n  resetLabel: \"RAZ\",\n  clipLabel: \"Clip\",\n  variant: \"primary\"\n}).node()\n\nig_tfr.current\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nig_tfr"
-  },
-  {
-    "objectID": "posts/ListRenderer.html",
-    "href": "posts/ListRenderer.html",
-    "title": "ListRenderer Demo",
-    "section": "",
-    "text": "How to use a Svelte component called ListRenderer.svelte.\n\n\n// ELEMENT\nmyList = html`&lt;my-list&gt;&lt;/my-list&gt;`\n\n\n\n\n\n\n\n// here DATASETS\ntextArray = [\"aa\",\"tutu\",\"toto\"];\n\n\n\n\n\n\n\nmyList.data = textArray;\n\n\n\n\n\n\nFor more help writing Svelte components, check out the Svelte tutorial or take look at some of the examples in the quarto-svelte documentation."
+    "text": "todo: create an inputGroup with Prefix valid Input\n\n\n\n\n\nimport { bsInput } from \"./bsui.js\"\nimport { super_bcv_parser } from \"./bsBcv.js\";\n\nviewof refInput2 = {\n  const bsgroup = new bsInput().node();\n  return bsgroup;\n}"
   },
   {
     "objectID": "posts/Ulist.html",
@@ -105,11 +35,88 @@
     "text": "strict idempotent OSIS conversion - Intra component communication via windows.store. TODO: H-store vs O-store\n\n\nviewof myList = {\n  return document.createElement(\"my-ulist\");\nà}\n\n// 2. Reactive Data Source\nmyArray = [\"Item 1\", \"Item 2\", \"Item 3\"]\n\n// 3. Reactive Bind\n// Whenever myArray changes, this block re-runs and pushes the new array\n// into the 'items' property of your custom element\n{\n  myUlist.items = myArray;\n}"
   },
   {
-    "objectID": "posts/bcv.html",
-    "href": "posts/bcv.html",
-    "title": "BCV",
+    "objectID": "posts/ListRenderer.html",
+    "href": "posts/ListRenderer.html",
+    "title": "ListRenderer Demo",
     "section": "",
-    "text": "todo: create an inputGroup with Prefix valid Input\n\n\n\n\n\nimport { bsInput } from \"./bsui.js\"\nimport { super_bcv_parser } from \"./bsBcv.js\";\n\nviewof refInput2 = {\n  const bsgroup = new bsInput().node();\n  return bsgroup;\n}"
+    "text": "How to use a Svelte component called ListRenderer.svelte.\n\n\n// ELEMENT\nmyList = html`&lt;my-list&gt;&lt;/my-list&gt;`\n\n\n\n\n\n\n\n// here DATASETS\ntextArray = [\"aa\",\"tutu\",\"toto\"];\n\n\n\n\n\n\n\nmyList.data = textArray;\n\n\n\n\n\n\nFor more help writing Svelte components, check out the Svelte tutorial or take look at some of the examples in the quarto-svelte documentation."
+  },
+  {
+    "objectID": "posts/BsUi.html",
+    "href": "posts/BsUi.html",
+    "title": "BsUi",
+    "section": "",
+    "text": "FIX OK .current, .accu OK restyle with queueMicrotask and MutationObserver OK transform\n\n\n\n\n// bsButton: Bootstrap-styled button, OJS-compatible, written as plain class javascript.\n\nimport {bsButton} from \"./bsui.js\"\n\nviewof run = new bsButton({\n  label: \"RAZ\",\n  variant: \"warning\",\n  value: { action: \"run\" }\n}).node()\n\nrun\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nimport { bsInput } from \"./bsui.js\"\n\nviewof name = new bsInput({\n  label: \"Your name\",\n  placeholder: \"Type here…\",\n  description: \"bsInput: Bootstrap-styled text input, OJS-compatible as plain js class\",\n  value: \"Pier\"\n}).node()\n\nname\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nimport { bsInputgroup } from \"./bsui.js\"\n\nviewof ig = new bsInputgroup({\n  placeholder: \"Type something…\",\n  buttonLabel: \"Accumulate\",\n  variant: \"success\"\n}).node()\n\nig.current\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nig\n\n\n\n\n\n\n\n\n\nimport { bsInputgroup3 } from \"./bsui.js\"\n\nviewof ig3 = new bsInputgroup3({\n  placeholder: \"Hi Type something3…\",\n  prefixHTML: '&lt;i class=\"bi bi-search\"&gt;&lt;/i&gt;',\n  addLabel: \"Add\",\n  resetLabel: \"RAZ\",\n  clipLabel: \"Clip\",\n  variant: \"primary\"\n}).node()\n\nig3.current\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nig3\n\n\n\n\n\n\n\n\nbsInputgroupTransform\n\nimport { bsInputgroupTransform } from \"./bsui.js\"\n\nviewof ig_tfr = new bsInputgroupTransform({\n  placeholder: \"Hi Type something tfrm…\",\n  prefixHTML: '&lt;i class=\"bi bi-search\"&gt;&lt;/i&gt;',\n  addLabel: \"Add\",\n  resetLabel: \"RAZ\",\n  clipLabel: \"Clip\",\n  variant: \"primary\"\n}).node()\n\nig_tfr.current\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nig_tfr"
+  },
+  {
+    "objectID": "posts/Breader2.html",
+    "href": "posts/Breader2.html",
+    "title": "Breader2",
+    "section": "",
+    "text": "bsInput –&gt; validate/fetch –&gt; display\n\n\nOK x=&gt; x echo input\nnext x=&gt; osis\nsuper_bcv_parser does the validation of an input string and\nbsInputAndDebounce manages the UI, reacts with a transform/validation method, triggers the fetch\n\n\n\n\n\n\ngraph LR\n  bsInputAndDebounce --&gt; super_bcv_parser\n\n\n\n\n\n\nAttention! uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received Fix: is input is unchanged from previous dont trigger the fetch\n\n\n\n\nimport { bsInputAndFetch2 } from \"./bsui_debounce.js\"\nimport { SuperParser } from \"./bsBcv2.js\";\n\nsuperBCV = new SuperParser(); // instance of singleton parser\n//dummy = superBCV.parse(\"Gen1.1\"); // warm JIT\n\nviewof refInput2 = {\n  const bsgroup = new bsInputAndFetch2({\n    prefixHTML: \"&lt;i class='bi bi-book'&gt;&lt;/i&gt;\",\n    placeholder:  \"Here Bible Reference…\",\n    transform: superBCV.osis_array,     // &lt;---- HERE\n//    transform:  superBCV.parseOsis,     // &lt;---- HERE\n//    fetcher: superBCV.fetchPassage,\n    fetcher: superBCV.fetch_json,\n//    fetcher: superBCV.fetch,\n    parsingInspector: superBCV.parsingInspector,\n//    addLabel: \"Add\",\n    resetLabel: \"RAZ\"\n//    clipLabel: \"CLIP\"\n  }).node();\n\n  return bsgroup;\n}\n\n//refInput2.current   // \"John.3.16\"\nhtml`&lt;pre&gt;${JSON.stringify(refInput2.current)}&lt;/pre&gt;`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrefInput2.content\n\n\n\n\n\n\n\nrestyle = {\n  // Wait until OJS inserts it into the DOM\n  const container = viewof refInput2;\n//  const group = container.querySelector(\"div.input-group\");\n  \n  const allButtons = container.querySelectorAll(\"button\");\n\n  queueMicrotask(() =&gt; {\n   allButtons.forEach(btn =&gt; {\n      btn.classList.remove(\"btn-quarto\");\n      console.log(\"Hey\")\n    });\n  });\n}"
+  },
+  {
+    "objectID": "posts/BMix.html",
+    "href": "posts/BMix.html",
+    "title": "BMix",
+    "section": "",
+    "text": "Two components: Input [input, button, parser.transform = parse + url returns {url} & Output\n\n\n\n\n\nimport { bsInputBar } from \"./bsui_widgets.js\"\nimport { SuperParserFetcher } from \"./superParserFetcher.js\";\n\nsuperBCV = new SuperParserFetcher(); // instance of singleton parser\n\nviewof refInput2 = {\n  const bsgroup = new bsInputBar({\n    prefixHTML: \"&lt;i class='bi bi-book'&gt;&lt;/i&gt;\",\n    placeholder:  \"Here Bible Reference…\",\n//    transform: x =&gt; x,     // &lt;---- HERE\n    transform:  superBCV.parse_inspect,     // &lt;---- HERE\n//    fetcher: superBCV.fetchPassage,\n    fetcher: superBCV.fetch_ready,\n//    fetcher: superBCV.fetch,\n    parsingInspector: superBCV.parsingInspector,\n//    addLabel: \"Add\",\n    resetLabel: \"RAZ\"\n//    clipLabel: \"CLIP\"\n  }).node();\n\n  return bsgroup;\n}\n\n//refInput2.current   // \"John.3.16\"\n//html`&lt;pre&gt;${JSON.stringify(refInput2.current,null,2)}&lt;/pre&gt;`   // \"John.3.16\"\nhtml`&lt;pre&gt;${JSON.stringify(refInput2.payload,null,2)}&lt;/pre&gt;`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrestyle = {\n  // Wait until OJS inserts it into the DOM\n  const container = viewof refInput2;\n//  const group = container.querySelector(\"div.input-group\");\n  \n  const allButtons = container.querySelectorAll(\"button\");\n\n  queueMicrotask(() =&gt; {\n   allButtons.forEach(btn =&gt; {\n      btn.classList.remove(\"btn-quarto\");\n      console.log(\"Hey\")\n    });\n  });\n}"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Svlt2",
+    "section": "",
+    "text": "BMix\n\n\nBootstrap Mix of JS & Svelte\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBreader\n\n\njust get’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBreader2\n\n\njust get’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBsParser\n\n\nvalid’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBsUi\n\n\nemulat’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nquarto-svelte example\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nListRenderer Demo\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOsisParserUI\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUlist\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVerse Workflow\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBCV\n\n\nread’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndiv#output\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nechoInput\n\n\nBootstrap Mix of JS & Svelte\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrefengine Test\n\n\nFailed to fetch dynamically imported module\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrefui\n\n\nInput_Bar.js with a) OJS contract b) Boostrap Style c) embedded bcv_parser\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStrong Study Workflow\n\n\nmethodology\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWidgets\n\n\njust get’em\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
+    "objectID": "posts/Breader.html",
+    "href": "posts/Breader.html",
+    "title": "Breader",
+    "section": "",
+    "text": "bsInput –&gt; validate/fetch –&gt; display\n\n\nsuper_bcv_parser does the validation of an input string and\nbsInputAndDebounce manages the UI, reacts with a transform/validation method, triggers the fetch\n\n\n\n\n\n\ngraph LR\n  bsInputAndDebounce --&gt; super_bcv_parser\n\n\n\n\n\n\nAttention! uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received Fix: is input is unchanged from previous dont trigger the fetch\n\n\n\n\nimport { bsInputAndFetch2 } from \"./bsui_debounce.js\"\nimport { super_bcv_parser } from \"./bsBcv.js\";\n\nsuperBCV = new super_bcv_parser() // instance of singleton parser\n//dummy = superBCV.parse(\"Gen1.1\"); // warm JIT\n\nviewof refInput2 = {\n  const bsgroup = new bsInputAndFetch2({\n    prefixHTML: \"&lt;i class='bi bi-book'&gt;&lt;/i&gt;\",\n    placeholder:  \"Here Bible Reference…\",\n    transform: superBCV.osis_array,     // &lt;---- HERE\n    fetcher: superBCV.fetchPassage,\n//    addLabel: \"Add\",\n    resetLabel: \"RAZ\"\n//    clipLabel: \"CLIP\"\n  }).node();\n\n  return bsgroup;\n}\n\n//refInput2.current   // \"John.3.16\"\nhtml`&lt;pre&gt;${JSON.stringify(refInput2.current)}&lt;/pre&gt;`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrefInput2.content\n\n\n\n\n\n\n\nrestyle = {\n  // Wait until OJS inserts it into the DOM\n  const container = viewof refInput2;\n//  const group = container.querySelector(\"div.input-group\");\n  \n  const allButtons = container.querySelectorAll(\"button\");\n\n  queueMicrotask(() =&gt; {\n   allButtons.forEach(btn =&gt; {\n      btn.classList.remove(\"btn-quarto\");\n      console.log(\"Hey\")\n    });\n  });\n}"
+  },
+  {
+    "objectID": "posts/BsParser.html",
+    "href": "posts/BsParser.html",
+    "title": "BsParser",
+    "section": "",
+    "text": "Validate an bsInput with one super_bcv_wrapper\n\nOJS requires the path to start with ./ or ../\n\n\n\n\nimport { bsInputgroupTransform } from \"./bsui.js\"\nimport { super_bcv_parser } from \"./bsBcv.js\";\n\nsuperBCV = new super_bcv_parser() // instance of singleton parser\n\nviewof refInput = new bsInputgroupTransform({\n  prefixHTML: \"&lt;i class='bi bi-book'&gt;&lt;/i&gt;\",\n  placeholder: \"Enter Bible reference…\",\n  transform: superBCV.osis_array,     // &lt;---- HERE\n  fetcher: superBCV.fetchPassage,\n  addLabel: \"Add\",\n  resetLabel: \"RAZ\",\n  clipLabel: \"CLIP\"\n}).node()\n\nrefInput\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrefInput.content\n\n\n\n\n\n\n\n\n\nimport { bsInputgroupFetch } from \"./bsui.js\"\n\n//superBCV2 = new super_bcv_parser() // instance of singleton parser\n\nviewof refInput2 = {\n  const bsgroup = new bsInputgroupFetch({\n    prefixHTML: \"&lt;i class='bi bi-book'&gt;&lt;/i&gt;\",\n    placeholder: \"Enter Bible reference…\",\n    transform: superBCV.osis_array,     // &lt;---- HERE\n    fetcher: superBCV.fetchPassage,\n    addLabel: \"Add\",\n    resetLabel: \"RAZ\",\n    clipLabel: \"CLIP\"\n  }).node();\n\n  return bsgroup;\n}\n\nrestyle = {\n  // Wait until OJS inserts it into the DOM\n  const container = viewof refInput2;\n//  const group = container.querySelector(\"div.input-group\");\n  \n  const allButtons = container.querySelectorAll(\"button\");\n\n  queueMicrotask(() =&gt; {\n   allButtons.forEach(btn =&gt; {\n      btn.classList.remove(\"btn-quarto\");\n      console.log(\"Hey\")\n    });\n  });\n  \n/**  \n  const obs = new MutationObserver(() =&gt; {\n    allButtons.forEach(btn =&gt; {\n        btn.classList.remove(\"btn-quarto\");\n        });\n    });\n    \n  obs.observe(container, { childList: true, subtree: true });\n*/\n}\n\nrefInput2.current\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrefInput2.content"
+  },
+  {
+    "objectID": "posts/Circles_example.html",
+    "href": "posts/Circles_example.html",
+    "title": "quarto-svelte example",
+    "section": "",
+    "text": "This document shows you how to use a basic example Svelte component called Circles.svelte.\nCreate one using an HTML template:\n\nmyCircles = html`&lt;my-circles&gt;&lt;/my-circles&gt;`\n\n\n\n\n\n\nNow the fun part - updating our visual when our document changes. It’s as simple as changing the prop using componentName.propName =.\nFor example, here are three datasets and an Observable Inputs dropdown menu that lets you select one of three datasets:\n\n// here are some datasets...\nallDatasets = new Map([\n    [\"Dataset A\", [5, 15, 25, 17, 8]],\n    [\"Dataset B\", [25, 5, 5]],\n    [\"Dataset C\", [12, 5, 8, 21, 5]]\n  ]);\n\n\n\n\n\n\n\nviewof selectedDataset =\n  Inputs.select(allDatasets, { label: \"Selected dataset\" });\n\n\n\n\n\n\nNow we can update the prop data of the visual myCircles using:\n\nmyCircles.data = selectedDataset\n\n\n\n\n\n\nAnd there you go! 🚀\nFor more help writing Svelte components, check out the Svelte tutorial or take look at some of the examples in the quarto-svelte documentation."
+  },
+  {
+    "objectID": "posts/OsisParserUI.html",
+    "href": "posts/OsisParserUI.html",
+    "title": "OsisParserUI",
+    "section": "",
+    "text": "strict idempotent OSIS conversion - Intra component communication via windows.store. TODO: H-store vs O-store\n\n\nmyOsisParser = html`&lt;my-osisparserui&gt;&lt;/my-osisparserui&gt;`"
+  },
+  {
+    "objectID": "posts/VerseWorkflow.html",
+    "href": "posts/VerseWorkflow.html",
+    "title": "Verse Workflow",
+    "section": "",
+    "text": "For Bible Reference From UserInput To Display\n\n\nUserInput is Free Text Transformed to strict OSIS Then as_is_passthrough to service worker fetching. =&gt; parse.hsub_entities()\n\n\nUserInput accepts free text as does bcv_parser\nParsing delivers Strict Idempotent String like (Gen.1.2 SG21); (Gal.2.8,Phil.4.6 KJV)\nand HSUB_RefArray aka hsub_entities() like [“Gen.1.2!SG21”,“Gal.2.8,Phil.4.6!KJV”] with elements acceptable to hsubre service worker.\nURL service worker\nwhere to put fetch ?\n\n\nmyOsisParser = html`&lt;my-osisparserui&gt;&lt;/my-osisparserui&gt;`"
+  },
+  {
+    "objectID": "posts/divoutput.html",
+    "href": "posts/divoutput.html",
+    "title": "div#output",
+    "section": "",
+    "text": "titi\n\n  This is raw HTML that will be rendered directly by the browser.\n\ntoto\n\nviewof myInput = Inputs.text({label: \"Enter text:\"})\n\n// 2. Define a side-effect to mount it to the existing div\n{\n  const target = document.getElementById(\"outputDiv\");\n  // Clear the placeholder\n  target.innerHTML = \"\";\n  // Append the viewof DOM element\n  target.appendChild(viewof myInput);\n}"
   },
   {
     "objectID": "posts/refengine_test.html",

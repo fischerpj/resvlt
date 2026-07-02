@@ -81,11 +81,28 @@ restyle = {
 
 ```
 
+::: {#outputDiv}
+<!-- outputDiv is a static anchor -->
+:::
 
 ```{ojs}
 // ELEMENT
 myList = html`<my-list></my-list>`
+
+// 2. Define a side-effect to mount it to the existing div
+sideffect = {
+  const target = document.getElementById("outputDiv");
+  target.classList.add("special-text")
+  // Clear the placeholder
+  target.innerHTML = "";
+  // Append the viewof DOM element
+  target.appendChild(myList);
+  return null
+}
+
 ```
+
+
 
 ```{ojs}
 // here DATASETS
@@ -105,5 +122,9 @@ content_array_global = ref.response ?  ref.response.flatMap(obj => obj.content_a
   html`<hr>`
   html`<div id="debug"><h3>debug info</h3></div>`; 
     ref;
+  
+  html`<hr>`
+  myPara = html`<p>Toto is testing fontsize</p>`
+  
 ```
 

@@ -1,6 +1,7 @@
 <!-- this line is needed to add your svelte component to quarto! -->
 <svelte:options customElement={{
   tag: "my-list",
+  shadow: 'none',
   props: {
     data: { type: "Array" }
   }

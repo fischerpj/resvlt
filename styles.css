@@ -1,1 +1,70 @@
 /* css styles */
+/* Establish fluid typography variables */
+:root {
+  --font-size-body: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); 
+  --font-size-h1: clamp(2.25rem, 1.75rem + 2.5vw, 3.75rem);
+  --font-size-h2: clamp(1.75rem, 1.5rem + 1.25vw, 2.5rem);
+}
+
+/* Target Quarto's main article body */
+.page-columns .content-column,
+main.content {
+  max-width: 66ch !important; /* Forces the perfect reading measure */
+}
+
+/* Apply optimal text rhythm */
+body {
+  font-size: var(--font-size-body);
+  line-height: 1.55; 
+  letter-spacing: -0.011em; 
+}
+
+h1, h2, h3 {
+  line-height: 1.15;
+  letter-spacing: -0.022em;
+}
+
+/* ==========================================================================
+   SITE-WIDE STYLES (Include in _quarto.yml)
+   ========================================================================== */
+
+/* Default body text size */
+p {
+  font-size: 24px;
+  line-height: 1.6;
+}
+
+/* Global responsive adjustment */
+@media screen and (max-width: 768px) {
+  p {
+    font-size: 18px;
+  }
+}
+
+/* ==========================================================================
+   PAGE-SPECIFIC STYLES
+   To use these, assign the class "page-special" to a container on your page
+   ========================================================================== */
+
+.page-special .special-text {
+  font-size: 28px;
+  color: #2c3e0;
+}
+
+/* Media query targeted only at the special page container */
+@media screen and (max-width: 768px) {
+  .page-special .special-text {
+    font-size: 24px;
+    font-weight: bold;
+  }
+}
+
+/* ==========================================================================
+   HELPER CLASSES
+   ========================================================================== */
+
+.highlight-box {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-left: 5px solid #007bff;
+}
