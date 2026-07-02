@@ -1,4 +1,10 @@
 /* css styles */
+/* Hide entire title blck */
+#Xtitle-block-header {
+  display: none !important;
+}
+
+
 /* Establish fluid typography variables */
 :root {
   --font-size-body: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); 

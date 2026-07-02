@@ -1,6 +1,5 @@
 ---
 title: refui
-subtitle: "Input_Bar.js with a) OJS contract b) Boostrap Style c) embedded bcv_parser"
 filters:
   - jimjam-slam/quarto-svelte
 quarto-svelte:
@@ -8,6 +7,10 @@ quarto-svelte:
     - ../components/ListRenderer.svelte
 execute:
   echo: false
+format:
+  html:
+    title-block-banner: false
+    title-block-style: none
 ---
 
 ::: {#inputDiv}
@@ -67,11 +70,22 @@ import { bsInput } from "./refui_sole.js";
 restyle = {
   // Wait until OJS inserts it into the DOM
   const container = viewof ref;
+  const root = document.documentElement;
 //  const group = container.querySelector("div.input-group");
+
+  const titleBlock = root.querySelector(".quarto-title-block");
   
   const allButtons = container.querySelectorAll("button");
 
   queueMicrotask(() => {
+  
+    if (titleBlock) {
+      titleBlock.style.visibility= "hidden";
+      titleBlock.style.height= "0";
+      titleBlock.style.margin= "0";
+      titleBlock.style.padding= "0";
+    };
+  
    allButtons.forEach(btn => {
       btn.classList.remove("btn-quarto");
       console.log("Hey")
@@ -122,9 +136,5 @@ content_array_global = ref.response ?  ref.response.flatMap(obj => obj.content_a
   html`<hr>`
   html`<div id="debug"><h3>debug info</h3></div>`; 
     ref;
-  
-  html`<hr>`
-  myPara = html`<p>Toto is testing fontsize</p>`
-  
 ```
 
