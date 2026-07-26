@@ -1,0 +1,51 @@
+---
+title: random
+format: html
+execute:
+  echo: false
+---
+
+```{ojs}
+viewof n = Inputs.select
+            (d3.range(0, 21, 5), 
+              {label: "Length:",
+              value: 5}
+            )
+```
+
+```{ojs}
+/**
+ * Strict Uniform Float in [0, 1) using 53 bits of cryptographically pure entropy.
+ * Matches IEEE-754 double precision limit without uniform density loss.
+ */
+function getStrictUniformFloat() {
+  const buffer = new Uint32Array(2);
+  crypto.getRandomValues(buffer);
+
+  // Extract 53 random bits (53-bit mantissa precision for JS numbers)
+  const high = buffer[0] & 0x1FFFFF; // 21 bits
+  const low = buffer[1];             // 32 bits
+
+  const combined53BitInt = (high * 0x100000000) + low;
+
+  // Divide by 2^53 (9007199254740992)
+  return combined53BitInt / 9007199254740992;
+}
+
+side = {
+  const iteration = !n ? 1 : n; 
+  console.log(iteration);
+  
+  let randomNumbers = [];
+
+  for (let i = 0; i < iteration; i++) {
+    randomNumbers.push(Number((getStrictUniformFloat()*150).toFixed(2)));
+  }
+
+  console.log(randomNumbers);
+  return randomNumbers
+}
+
+side
+```
+

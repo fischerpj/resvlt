@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>div#output – Resvlt</title>
+<title>random – Resvlt</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -149,7 +149,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">div#output</h1>
+      <h1 class="title">random</h1>
                       </div>
   </div>
     
@@ -173,47 +173,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>titi</p>
-<div id="outputDiv" class="special-text" style="padding: 20px; border: 1px solid #ccc;">
-  <p>This is raw HTML that will be rendered directly by the browser.</p>
-</div>
-<p>toto</p>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="22" data-source-offset="-24"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 21;"><span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>viewof myInput <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">text</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Enter text:"</span>})</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">// 2. Define a side-effect to mount it to the existing div</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> target <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"outputDiv"</span>)<span class="op">;</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Clear the placeholder</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  target<span class="op">.</span><span class="at">innerHTML</span> <span class="op">=</span> <span class="st">""</span><span class="op">;</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Append the viewof DOM element</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  target<span class="op">.</span><span class="fu">appendChild</span>(viewof myInput)<span class="op">;</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="8" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 7;"><span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>viewof n <span class="op">=</span> Inputs<span class="op">.</span><span class="at">select</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            (d3<span class="op">.</span><span class="fu">range</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">21</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">,</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>              {<span class="dt">label</span><span class="op">:</span> <span class="st">"Length:"</span><span class="op">,</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>              <span class="dt">value</span><span class="op">:</span> <span class="dv">5</span>}</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-1-1" data-nodetype="declaration">
+<div id="ojs-cell-1" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-1-2" data-nodetype="expression">
-
-</div>
-</div>
-</div>
-</div>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="35" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 34;"><span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>viewof n <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>({</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"Number of random values"</span><span class="op">,</span></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="dt">max</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="dv">50</span></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>n</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="21" data-source-offset="-164"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 20;"><span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">getStrictUniformFloat</span>() {</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> buffer <span class="op">=</span> <span class="kw">new</span> <span class="bu">Uint32Array</span>(<span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  crypto<span class="op">.</span><span class="fu">getRandomValues</span>(buffer)<span class="op">;</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Extract 53 random bits (53-bit mantissa precision for JS numbers)</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> high <span class="op">=</span> buffer[<span class="dv">0</span>] <span class="op">&amp;</span> <span class="bn">0x1FFFFF</span><span class="op">;</span> <span class="co">// 21 bits</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> low <span class="op">=</span> buffer[<span class="dv">1</span>]<span class="op">;</span>             <span class="co">// 32 bits</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> combined53BitInt <span class="op">=</span> (high <span class="op">*</span> <span class="bn">0x100000000</span>) <span class="op">+</span> low<span class="op">;</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Divide by 2^53 (9007199254740992)</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> combined53BitInt <span class="op">/</span> <span class="dv">9007199254740992</span><span class="op">;</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>side <span class="op">=</span> {</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> iteration <span class="op">=</span> <span class="op">!</span>n <span class="op">?</span> <span class="dv">1</span> <span class="op">:</span> n<span class="op">;</span> </span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(iteration)<span class="op">;</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> randomNumbers <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> iteration<span class="op">;</span> i<span class="op">++</span>) {</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    randomNumbers<span class="op">.</span><span class="fu">push</span>(<span class="bu">Number</span>((<span class="fu">getStrictUniformFloat</span>()<span class="op">*</span><span class="dv">150</span>)<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)))<span class="op">;</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(randomNumbers)<span class="op">;</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> randomNumbers</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>side</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-2-1" data-nodetype="declaration">
@@ -223,7 +224,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-2-2" data-nodetype="expression">
+<div id="ojs-cell-2-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-3" data-nodetype="expression">
 
 </div>
 </div>
@@ -234,7 +242,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlxuLy8gMS4gQ3JlYXRlIHRoZSBpbnB1dFxudmlld29mIG15SW5wdXQgPSBJbnB1dHMudGV4dCh7bGFiZWw6IFwiRW50ZXIgdGV4dDpcIn0pXG5cbi8vIDIuIERlZmluZSBhIHNpZGUtZWZmZWN0IHRvIG1vdW50IGl0IHRvIHRoZSBleGlzdGluZyBkaXZcbntcbiAgY29uc3QgdGFyZ2V0ID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJvdXRwdXREaXZcIik7XG4gIC8vIENsZWFyIHRoZSBwbGFjZWhvbGRlclxuICB0YXJnZXQuaW5uZXJIVE1MID0gXCJcIjtcbiAgLy8gQXBwZW5kIHRoZSB2aWV3b2YgRE9NIGVsZW1lbnRcbiAgdGFyZ2V0LmFwcGVuZENoaWxkKHZpZXdvZiBteUlucHV0KTtcbn1cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBuID0gSW5wdXRzLnJhbmdlKHtcbiAgbGFiZWw6IFwiTnVtYmVyIG9mIHJhbmRvbSB2YWx1ZXNcIixcbiAgbWluOiAxLFxuICBtYXg6IDIwLFxuICBzdGVwOiAxLFxuICB2YWx1ZTogNTBcbn0pXG5cbm5cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnbXlJbnB1dCcpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCduJykifV19
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBuID0gSW5wdXRzLnNlbGVjdFxuICAgICAgICAgICAgKGQzLnJhbmdlKDAsIDIxLCA1KSwgXG4gICAgICAgICAgICAgIHtsYWJlbDogXCJMZW5ndGg6XCIsXG4gICAgICAgICAgICAgIHZhbHVlOiA1fVxuICAgICAgICAgICAgKVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0yIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiLyoqXG4gKiBTdHJpY3QgVW5pZm9ybSBGbG9hdCBpbiBbMCwgMSkgdXNpbmcgNTMgYml0cyBvZiBjcnlwdG9ncmFwaGljYWxseSBwdXJlIGVudHJvcHkuXG4gKiBNYXRjaGVzIElFRUUtNzU0IGRvdWJsZSBwcmVjaXNpb24gbGltaXQgd2l0aG91dCB1bmlmb3JtIGRlbnNpdHkgbG9zcy5cbiAqL1xuZnVuY3Rpb24gZ2V0U3RyaWN0VW5pZm9ybUZsb2F0KCkge1xuICBjb25zdCBidWZmZXIgPSBuZXcgVWludDMyQXJyYXkoMik7XG4gIGNyeXB0by5nZXRSYW5kb21WYWx1ZXMoYnVmZmVyKTtcblxuICAvLyBFeHRyYWN0IDUzIHJhbmRvbSBiaXRzICg1My1iaXQgbWFudGlzc2EgcHJlY2lzaW9uIGZvciBKUyBudW1iZXJzKVxuICBjb25zdCBoaWdoID0gYnVmZmVyWzBdICYgMHgxRkZGRkY7IC8vIDIxIGJpdHNcbiAgY29uc3QgbG93ID0gYnVmZmVyWzFdOyAgICAgICAgICAgICAvLyAzMiBiaXRzXG5cbiAgY29uc3QgY29tYmluZWQ1M0JpdEludCA9IChoaWdoICogMHgxMDAwMDAwMDApICsgbG93O1xuXG4gIC8vIERpdmlkZSBieSAyXjUzICg5MDA3MTk5MjU0NzQwOTkyKVxuICByZXR1cm4gY29tYmluZWQ1M0JpdEludCAvIDkwMDcxOTkyNTQ3NDA5OTI7XG59XG5cbnNpZGUgPSB7XG4gIGNvbnN0IGl0ZXJhdGlvbiA9ICFuID8gMSA6IG47IFxuICBjb25zb2xlLmxvZyhpdGVyYXRpb24pO1xuICBcbiAgbGV0IHJhbmRvbU51bWJlcnMgPSBbXTtcblxuICBmb3IgKGxldCBpID0gMDsgaSA8IGl0ZXJhdGlvbjsgaSsrKSB7XG4gICAgcmFuZG9tTnVtYmVycy5wdXNoKE51bWJlcigoZ2V0U3RyaWN0VW5pZm9ybUZsb2F0KCkqMTUwKS50b0ZpeGVkKDIpKSk7XG4gIH1cblxuICBjb25zb2xlLmxvZyhyYW5kb21OdW1iZXJzKTtcbiAgcmV0dXJuIHJhbmRvbU51bWJlcnNcbn1cblxuc2lkZVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCduJykifV19
 </script>
 <script type="module">
 if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }

@@ -30,3 +30,16 @@ viewof myInput = Inputs.text({label: "Enter text:"})
   target.appendChild(viewof myInput);
 }
 ```
+
+```{ojs}
+viewof n = Inputs.range({
+  label: "Number of random values",
+  min: 1,
+  max: 20,
+  step: 1,
+  value: 50
+})
+
+n
+```
+

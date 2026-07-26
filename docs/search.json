@@ -67,7 +67,7 @@
     "href": "index.html",
     "title": "Svlt2",
     "section": "",
-    "text": "BMix\n\n\nBootstrap Mix of JS & Svelte\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBreader\n\n\njust get’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBreader2\n\n\njust get’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBsParser\n\n\nvalid’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBsUi\n\n\nemulat’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nquarto-svelte example\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nListRenderer Demo\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOsisParserUI\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUlist\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVerse Workflow\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBCV\n\n\nread’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndiv#output\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nechoInput\n\n\nBootstrap Mix of JS & Svelte\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrefengine Test\n\n\nFailed to fetch dynamically imported module\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrefui\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStrong Study Workflow\n\n\nmethodology\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWidgets\n\n\njust get’em\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "BMix\n\n\nBootstrap Mix of JS & Svelte\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBreader\n\n\njust get’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBreader2\n\n\njust get’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBsParser\n\n\nvalid’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBsUi\n\n\nemulat’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nquarto-svelte example\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nListRenderer Demo\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOsisParserUI\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUlist\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVerse Workflow\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBCV\n\n\nread’em\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndiv#output\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nechoInput\n\n\nBootstrap Mix of JS & Svelte\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrandom\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrefengine Test\n\n\nFailed to fetch dynamically imported module\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrefui\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStrong Study Workflow\n\n\nmethodology\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWidgets\n\n\njust get’em\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -116,7 +116,7 @@
     "href": "posts/divoutput.html",
     "title": "div#output",
     "section": "",
-    "text": "titi\n\n  This is raw HTML that will be rendered directly by the browser.\n\ntoto\n\nviewof myInput = Inputs.text({label: \"Enter text:\"})\n\n// 2. Define a side-effect to mount it to the existing div\n{\n  const target = document.getElementById(\"outputDiv\");\n  // Clear the placeholder\n  target.innerHTML = \"\";\n  // Append the viewof DOM element\n  target.appendChild(viewof myInput);\n}"
+    "text": "titi\n\n  This is raw HTML that will be rendered directly by the browser.\n\ntoto\n\nviewof myInput = Inputs.text({label: \"Enter text:\"})\n\n// 2. Define a side-effect to mount it to the existing div\n{\n  const target = document.getElementById(\"outputDiv\");\n  // Clear the placeholder\n  target.innerHTML = \"\";\n  // Append the viewof DOM element\n  target.appendChild(viewof myInput);\n}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nviewof n = Inputs.range({\n  label: \"Number of random values\",\n  min: 1,\n  max: 20,\n  step: 1,\n  value: 50\n})\n\nn"
   },
   {
     "objectID": "posts/refengine_test.html",
@@ -131,5 +131,12 @@
     "title": "Strong Study Workflow",
     "section": "",
     "text": "follow StrongNumber from KJV to blueletterbible resources.\n\n\n\n\n\n\ngraph LR\n  KJV::strongNumber --&gt; blueletterbible"
+  },
+  {
+    "objectID": "posts/random_series.html",
+    "href": "posts/random_series.html",
+    "title": "random",
+    "section": "",
+    "text": "viewof n = Inputs.select\n            (d3.range(0, 21, 5), \n              {label: \"Length:\",\n              value: 5}\n            )\n\n\n\n\n\n\n\nfunction getStrictUniformFloat() {\n  const buffer = new Uint32Array(2);\n  crypto.getRandomValues(buffer);\n\n  // Extract 53 random bits (53-bit mantissa precision for JS numbers)\n  const high = buffer[0] & 0x1FFFFF; // 21 bits\n  const low = buffer[1];             // 32 bits\n\n  const combined53BitInt = (high * 0x100000000) + low;\n\n  // Divide by 2^53 (9007199254740992)\n  return combined53BitInt / 9007199254740992;\n}\n\nside = {\n  const iteration = !n ? 1 : n; \n  console.log(iteration);\n  \n  let randomNumbers = [];\n\n  for (let i = 0; i &lt; iteration; i++) {\n    randomNumbers.push(Number((getStrictUniformFloat()*150).toFixed(2)));\n  }\n\n  console.log(randomNumbers);\n  return randomNumbers\n}\n\nside"
   }
 ]
