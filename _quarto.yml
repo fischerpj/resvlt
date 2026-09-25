@@ -6,8 +6,8 @@ project:
     - "about.qmd"
     - "posts/*.qmd"
   resources:
-    - "sw.js"
-    - "manifest.json" # included if you use a PWA manifest
+    - "posts/sw.js"
+    - "posts/manifest.json" # included if you use a PWA manifest
   
 website:
   title: "Resvlt"
