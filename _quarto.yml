@@ -5,6 +5,10 @@ project:
     - "index.qmd"
     - "about.qmd"
     - "posts/*.qmd"
+  resources:
+    - "sw.js"
+    - "manifest.json" # included if you use a PWA manifest
+  
 website:
   title: "Resvlt"
   navbar:
@@ -18,7 +22,4 @@ format:
   html:
     theme: lumen
     css: styles.css
-resources:
-  - www/sw.js
-
 
