@@ -1,11 +1,11 @@
 const CACHE_NAME = 'quarto-pwa-v1';
 const ASSETS_TO_CACHE = [
   './index.html',
-  './bcv_parser.js',
-  './refengine.js',
-  './refui_sole.js',
-  './lang/en.js',
-  './manifest.json'
+//  './bcv_parser.js',
+//  './refengine.js',
+//  './refui_sole.js',
+//  './lang/en.js',
+//  './manifest.json'
 ];
 
 // Install Event: Cache core files
