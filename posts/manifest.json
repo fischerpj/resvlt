@@ -1,6 +1,7 @@
 {
   "name": "Minimal PWA",
   "short_name": "RefPwa",
+  "scope": "/resvlt/"
   "display": "standalone",
   "icons": [
     {
