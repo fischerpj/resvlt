@@ -1,6 +1,8 @@
 {
   "name": "Minimal PWA",
-  "start_url": "./",
+  "short_name": "RefPwa",
+ "start_url": "/resvlt/posts/refpwa.html",
+  "scope": "/resvlt/",
   "display": "standalone",
   "icons": [
     {
