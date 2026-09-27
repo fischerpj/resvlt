@@ -28,7 +28,7 @@ format:
 
 RefPWA is a fork of Refui as installable Progressive Web Application.
 
-1. sole manifest.json in same folder is sufficient to make this document an installable PWA with keys like "start_url": "/resvlt/posts/refpwa.html", "scope": "/resvlt/posts/",
+1. A sole manifest.json in same folder is sufficient to make this document an installable PWA with keys like "start_url": "/resvlt/posts/refpwa.html", "scope": "/resvlt/posts/",
 2. optionally, install sw.js in this document header inline.
 
 ::: {#inputDiv}
