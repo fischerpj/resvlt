@@ -18,7 +18,7 @@ format:
           <script>
             if ('serviceWorker' in navigator) {
               window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/resvlt/posts/sw.js')
+                navigator.serviceWorker.register('posts/sw.js')
                   .then(reg => console.log('Service Worker registered! Scope:', reg.scope))
                   .catch(err => console.log('Service Worker registration failed:', err));
               });
