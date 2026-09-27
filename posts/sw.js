@@ -1,6 +1,6 @@
 const CACHE_NAME = 'quarto-pwa-v1';
 const ASSETS_TO_CACHE = [
-  '/resvlt/posts/refpwa.html'
+  './refpwa.html'
 //  '/resvlt/posts/bcv_parser.js'
 //  '/resvlt/posts/refengine.js',
 //  '/resvlt/posts/refui_sole.js',
