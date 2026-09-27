@@ -7,3 +7,4 @@ const ASSETS_TO_CACHE = [
 //  '/resvlt/posts/refui_sole.js',
 //  '/resvlt/posts/lang/en.js',
 //  '/resvlt/posts/manifest.json'];
+]
