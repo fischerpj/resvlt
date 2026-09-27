@@ -18,7 +18,7 @@ format:
           <script>
             if ('serviceWorker' in navigator) {
               window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/resvlt/posts/sw.js')
+                navigator.serviceWorker.register('./sw.js')
                   .then(reg => console.log('Service Worker registered! Scope:', reg.scope))
                   .catch(err => console.log('Service Worker registration failed:', err));
               });
@@ -27,6 +27,10 @@ format:
 ---
 
 RefPWA is a fork of Refui as installable Progressive Web Application.
+
+Touch points are:
+1. _quarto.yaml resources to be copied into output
+2. this .qmd include-in-header:
 
 1. A sole manifest.json in same folder is sufficient to make this document an installable PWA with keys like "start_url": "/resvlt/posts/refpwa.html", "scope": "/resvlt/posts/",
 2. optionally, install sw.js in this document header inline.
